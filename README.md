@@ -426,7 +426,7 @@ GO
 ---
 
 ## Database Schema Summary
-![Cosmatic Shop Management Screenshot](Images/CosmeticMarketplaceDB_Schema_Diagram.png)
+<img src="Cosmatic Shop Management/Images" alt="Description">
 ## Project Screenshots
 
 
