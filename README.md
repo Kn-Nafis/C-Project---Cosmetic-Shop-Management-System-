@@ -426,9 +426,10 @@ GO
 ---
 
 ## Database Schema Summary
+![Cosmatic Shop Management Screenshot](Images/CosmeticMarketplaceDB_Schema_Diagram.png)
 ## Project Screenshots
 
-![Cosmatic Shop Management Screenshot](Cosmatic Shop Management/Images/CosmeticMarketplaceDB_Schema_Diagram.png)
+
 
 ### Users
 Stores user account and profile information:
