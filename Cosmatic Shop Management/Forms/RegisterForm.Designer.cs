@@ -47,6 +47,8 @@
             blRegisterSubtitle = new Label();
             lblRegisterTitle = new Label();
             picLeftBanner = new PictureBox();
+            chkRegisterAsCustomer = new CheckBox();
+            chkRegisterAsAdmin = new CheckBox();
             pnlRegisterBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picLeftBanner).BeginInit();
             SuspendLayout();
@@ -54,6 +56,8 @@
             // pnlRegisterBox
             // 
             pnlRegisterBox.BackColor = SystemColors.ButtonHighlight;
+            pnlRegisterBox.Controls.Add(chkRegisterAsAdmin);
+            pnlRegisterBox.Controls.Add(chkRegisterAsCustomer);
             pnlRegisterBox.Controls.Add(btnBackToLogin);
             pnlRegisterBox.Controls.Add(btnRegister);
             pnlRegisterBox.Controls.Add(txtEmail);
@@ -78,9 +82,9 @@
             // btnBackToLogin
             // 
             btnBackToLogin.ForeColor = Color.FromArgb(74, 20, 140);
-            btnBackToLogin.Location = new Point(30, 542);
+            btnBackToLogin.Location = new Point(24, 585);
             btnBackToLogin.Name = "btnBackToLogin";
-            btnBackToLogin.Size = new Size(423, 51);
+            btnBackToLogin.Size = new Size(429, 51);
             btnBackToLogin.TabIndex = 17;
             btnBackToLogin.Text = "Back To Login";
             btnBackToLogin.UseVisualStyleBackColor = true;
@@ -88,11 +92,13 @@
             // btnRegister
             // 
             btnRegister.BackColor = Color.Coral;
+            btnRegister.FlatAppearance.BorderSize = 0;
+            btnRegister.FlatStyle = FlatStyle.Flat;
             btnRegister.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnRegister.ForeColor = SystemColors.ButtonHighlight;
-            btnRegister.Location = new Point(30, 485);
+            btnRegister.Location = new Point(24, 528);
             btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(423, 51);
+            btnRegister.Size = new Size(429, 51);
             btnRegister.TabIndex = 16;
             btnRegister.Text = "Register";
             btnRegister.UseVisualStyleBackColor = false;
@@ -248,6 +254,28 @@
             picLeftBanner.TabIndex = 2;
             picLeftBanner.TabStop = false;
             // 
+            // chkRegisterAsCustomer
+            // 
+            chkRegisterAsCustomer.AutoSize = true;
+            chkRegisterAsCustomer.ForeColor = Color.FromArgb(74, 20, 140);
+            chkRegisterAsCustomer.Location = new Point(33, 475);
+            chkRegisterAsCustomer.Name = "chkRegisterAsCustomer";
+            chkRegisterAsCustomer.Size = new Size(208, 29);
+            chkRegisterAsCustomer.TabIndex = 18;
+            chkRegisterAsCustomer.Text = "Register As Customer";
+            chkRegisterAsCustomer.UseVisualStyleBackColor = true;
+            // 
+            // chkRegisterAsAdmin
+            // 
+            chkRegisterAsAdmin.AutoSize = true;
+            chkRegisterAsAdmin.ForeColor = Color.FromArgb(74, 20, 140);
+            chkRegisterAsAdmin.Location = new Point(269, 475);
+            chkRegisterAsAdmin.Name = "chkRegisterAsAdmin";
+            chkRegisterAsAdmin.Size = new Size(184, 29);
+            chkRegisterAsAdmin.TabIndex = 19;
+            chkRegisterAsAdmin.Text = "Register As Admin";
+            chkRegisterAsAdmin.UseVisualStyleBackColor = true;
+            // 
             // RegisterForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -261,6 +289,7 @@
             Name = "RegisterForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "RegisterForm";
+            Load += RegisterForm_Load;
             pnlRegisterBox.ResumeLayout(false);
             pnlRegisterBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picLeftBanner).EndInit();
@@ -286,5 +315,7 @@
         private TextBox txtFullName;
         private Button btnBackToLogin;
         private Button btnRegister;
+        private CheckBox chkRegisterAsAdmin;
+        private CheckBox chkRegisterAsCustomer;
     }
 }

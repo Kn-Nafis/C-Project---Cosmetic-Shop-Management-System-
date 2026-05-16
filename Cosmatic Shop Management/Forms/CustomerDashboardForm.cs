@@ -29,6 +29,9 @@ namespace Cosmatic_Shop_Management.Forms
             btnShopCollection.Click -= btnShopCollection_Click;
             btnShopCollection.Click += btnShopCollection_Click;
 
+            btnProfile.Click -= btnProfile_Click;
+            btnProfile.Click += btnProfile_Click;
+
             pnlMaleSection.Click -= pnlMaleSection_Click;
             pnlMaleSection.Click += pnlMaleSection_Click;
 
@@ -161,9 +164,10 @@ namespace Cosmatic_Shop_Management.Forms
                     {
                         if (!string.IsNullOrWhiteSpace(imagePath) && File.Exists(imagePath))
                         {
-                            using (FileStream fs = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+                            byte[] bytes = File.ReadAllBytes(imagePath);
+                            using (MemoryStream ms = new MemoryStream(bytes))
+                            using (Image img = Image.FromStream(ms))
                             {
-                                Image img = Image.FromStream(fs);
                                 pic.Image = new Bitmap(img);
                             }
                         }
@@ -293,6 +297,13 @@ namespace Cosmatic_Shop_Management.Forms
             LoadHighlightedProducts();
         }
 
+        private void btnProfile_Click(object sender, EventArgs e)
+        {
+            MyOrdersForm form = new MyOrdersForm();
+            form.ShowDialog();
+            LoadHighlightedProducts(txtSearchProducts.Text.Trim());
+        }
+
         private void pnlMaleSection_Click(object? sender, EventArgs e)
         {
             MaleProductsForm form = new MaleProductsForm();
@@ -329,22 +340,14 @@ namespace Cosmatic_Shop_Management.Forms
 
         private void picFemaleSection_Click(object sender, EventArgs e)
         {
-
         }
 
         private void pnlFemaleSection_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void pnlMaleSection_Paint(object sender, PaintEventArgs e)
         {
-
-        }
-
-        private void btnProfile_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

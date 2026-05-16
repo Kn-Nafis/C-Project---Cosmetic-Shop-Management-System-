@@ -1,7 +1,5 @@
 ﻿using Cosmatic_Shop_Management.DAL;
 using Cosmatic_Shop_Management.Helpers;
-//using CosmeticMarketplace.DAL;
-//using CosmeticMarketplace.Helpers;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Windows.Forms;
@@ -22,6 +20,12 @@ namespace Cosmatic_Shop_Management.Forms
 
             btnBackToLogin.Click -= btnBackToLogin_Click;
             btnBackToLogin.Click += btnBackToLogin_Click;
+
+            chkRegisterAsCustomer.CheckedChanged -= chkRegisterAsCustomer_CheckedChanged;
+            chkRegisterAsCustomer.CheckedChanged += chkRegisterAsCustomer_CheckedChanged;
+
+            chkRegisterAsAdmin.CheckedChanged -= chkRegisterAsAdmin_CheckedChanged;
+            chkRegisterAsAdmin.CheckedChanged += chkRegisterAsAdmin_CheckedChanged;
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -36,6 +40,18 @@ namespace Cosmatic_Shop_Management.Forms
             if (fullName == "" || email == "" || password == "" || confirmPassword == "")
             {
                 MessageBox.Show("Please fill all required fields.");
+                return;
+            }
+
+            if (!chkRegisterAsCustomer.Checked && !chkRegisterAsAdmin.Checked)
+            {
+                MessageBox.Show("Please select Customer or Admin registration.");
+                return;
+            }
+
+            if (chkRegisterAsCustomer.Checked && chkRegisterAsAdmin.Checked)
+            {
+                MessageBox.Show("Please select only one role.");
                 return;
             }
 
@@ -60,7 +76,6 @@ namespace Cosmatic_Shop_Management.Forms
             try
             {
                 string checkEmailQuery = "SELECT COUNT(*) FROM Users WHERE Email = @Email";
-
                 SqlParameter[] checkParams =
                 {
                     new SqlParameter("@Email", email)
@@ -76,10 +91,27 @@ namespace Cosmatic_Shop_Management.Forms
 
                 PasswordHasher.CreatePasswordHash(password, out string passwordHash, out string passwordSalt);
 
-                string roleQuery = "SELECT RoleId FROM Roles WHERE RoleName = 'Customer'";
-                int customerRoleId = Convert.ToInt32(DatabaseHelper.ExecuteScalar(roleQuery));
+                string selectedRoleName = chkRegisterAsAdmin.Checked ? "Admin" : "Customer";
 
-                string insertQuery = @"
+                string roleQuery = "SELECT RoleId FROM Roles WHERE RoleName = @RoleName";
+                SqlParameter[] roleParams =
+                {
+                    new SqlParameter("@RoleName", selectedRoleName)
+                };
+
+                object roleResult = DatabaseHelper.ExecuteScalar(roleQuery, roleParams);
+
+                if (roleResult == null || roleResult == DBNull.Value)
+                {
+                    MessageBox.Show(selectedRoleName + " role not found in Roles table.");
+                    return;
+                }
+
+                int selectedRoleId = Convert.ToInt32(roleResult);
+
+                int isActiveValue = chkRegisterAsAdmin.Checked ? 0 : 1;
+
+                string insertUserQuery = @"
                     INSERT INTO Users
                     (
                         FullName,
@@ -100,11 +132,13 @@ namespace Cosmatic_Shop_Management.Forms
                         @PasswordHash,
                         @PasswordSalt,
                         @RoleId,
-                        1
-                    )
+                        @IsActive
+                    );
+
+                    SELECT SCOPE_IDENTITY();
                 ";
 
-                SqlParameter[] insertParams =
+                SqlParameter[] insertUserParams =
                 {
                     new SqlParameter("@FullName", fullName),
                     new SqlParameter("@Email", email),
@@ -112,27 +146,84 @@ namespace Cosmatic_Shop_Management.Forms
                     new SqlParameter("@Address", address),
                     new SqlParameter("@PasswordHash", passwordHash),
                     new SqlParameter("@PasswordSalt", passwordSalt),
-                    new SqlParameter("@RoleId", customerRoleId)
+                    new SqlParameter("@RoleId", selectedRoleId),
+                    new SqlParameter("@IsActive", isActiveValue)
                 };
 
-                int rows = DatabaseHelper.ExecuteNonQuery(insertQuery, insertParams);
+                object newUserIdObj = DatabaseHelper.ExecuteScalar(insertUserQuery, insertUserParams);
 
-                if (rows > 0)
+                if (newUserIdObj == null || newUserIdObj == DBNull.Value)
                 {
-                    MessageBox.Show("Account created successfully. You can login now.");
+                    MessageBox.Show("Registration failed.");
+                    return;
+                }
 
-                    LoginForm loginForm = new LoginForm();
-                    loginForm.Show();
-                    this.Close();
+                int newUserId = Convert.ToInt32(newUserIdObj);
+
+                if (chkRegisterAsAdmin.Checked)
+                {
+                    string requestedShopName = fullName + "'s Shop";
+
+                    string insertApprovalQuery = @"
+                        INSERT INTO AdminApprovalRequests
+                        (
+                            UserId,
+                            RequestedShopName,
+                            RequestStatus,
+                            RequestedAt,
+                            ReviewedAt,
+                            ReviewedBySuperAdminId
+                        )
+                        VALUES
+                        (
+                            @UserId,
+                            @RequestedShopName,
+                            @RequestStatus,
+                            GETDATE(),
+                            NULL,
+                            NULL
+                        )
+                    ";
+
+                    SqlParameter[] approvalParams =
+                    {
+                        new SqlParameter("@UserId", newUserId),
+                        new SqlParameter("@RequestedShopName", requestedShopName),
+                        new SqlParameter("@RequestStatus", "Pending")
+                    };
+
+                    DatabaseHelper.ExecuteNonQuery(insertApprovalQuery, approvalParams);
+
+                    MessageBox.Show("Admin registration request submitted successfully. Please wait for approval.");
                 }
                 else
                 {
-                    MessageBox.Show("Registration failed.");
+                    MessageBox.Show("Customer account created successfully. You can login now.");
                 }
+
+                LoginForm loginForm = new LoginForm();
+                loginForm.Show();
+                this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Registration error: " + ex.Message);
+            }
+        }
+
+        private void chkRegisterAsCustomer_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkRegisterAsCustomer.Checked)
+            {
+                chkRegisterAsAdmin.Checked = false;
+            }
+        }
+
+        private void chkRegisterAsAdmin_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkRegisterAsAdmin.Checked)
+            {
+                chkRegisterAsCustomer.Checked = false;
             }
         }
 
@@ -141,6 +232,10 @@ namespace Cosmatic_Shop_Management.Forms
             LoginForm loginForm = new LoginForm();
             loginForm.Show();
             this.Close();
+        }
+
+        private void RegisterForm_Load(object sender, EventArgs e)
+        {
         }
     }
 }

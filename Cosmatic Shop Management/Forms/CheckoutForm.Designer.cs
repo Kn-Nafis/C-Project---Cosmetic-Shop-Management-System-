@@ -226,6 +226,7 @@
             dgvOrderSummary.AllowUserToDeleteRows = false;
             dgvOrderSummary.AllowUserToResizeRows = false;
             dgvOrderSummary.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvOrderSummary.BackgroundColor = Color.White;
             dgvOrderSummary.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvOrderSummary.GridColor = SystemColors.InactiveBorder;
             dgvOrderSummary.Location = new Point(570, 101);
@@ -255,6 +256,8 @@
             Name = "CheckoutForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CheckoutForm";
+            TopMost = true;
+            WindowState = FormWindowState.Maximized;
             Load += CheckoutForm_Load;
             pnlCustomerDetails.ResumeLayout(false);
             pnlCustomerDetails.PerformLayout();

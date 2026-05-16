@@ -16,6 +16,11 @@ namespace Cosmatic_Shop_Management.Forms
         private int pageSize = 5;
         private DataTable allOrders = new DataTable();
 
+        private int selectedOrderId = 0;
+        private int selectedProductId = 0;
+        private string selectedProductName = "";
+        private string selectedImagePath = "";
+
         public MyOrdersForm()
         {
             InitializeComponent();
@@ -78,6 +83,9 @@ namespace Cosmatic_Shop_Management.Forms
 
             btnViewInvoice.Click -= btnViewInvoice_Click;
             btnViewInvoice.Click += btnViewInvoice_Click;
+
+            btnReview.Click -= btnReview_Click;
+            btnReview.Click += btnReview_Click;
         }
 
         private void MyOrdersForm_Load(object? sender, EventArgs e)
@@ -273,6 +281,7 @@ namespace Cosmatic_Shop_Management.Forms
                 }
 
                 int orderId = Convert.ToInt32(dgvMyOrders.CurrentRow.Cells["OrderId"].Value);
+                selectedOrderId = orderId;
 
                 string orderQuery = @"
                     SELECT
@@ -333,6 +342,10 @@ namespace Cosmatic_Shop_Management.Forms
             {
                 flpOrderItems.Controls.Clear();
 
+                selectedProductId = 0;
+                selectedProductName = "";
+                selectedImagePath = "";
+
                 string query = @"
                     SELECT
                         OI.OrderItemId,
@@ -354,8 +367,21 @@ namespace Cosmatic_Shop_Management.Forms
 
                 DataTable dtItems = DatabaseHelper.GetDataTable(query, parameters);
 
+                bool firstItem = true;
+                decimal subtotal = 0m;
+
                 foreach (DataRow row in dtItems.Rows)
                 {
+                    if (firstItem)
+                    {
+                        selectedProductId = Convert.ToInt32(row["ProductId"]);
+                        selectedProductName = row["ProductName"].ToString() ?? "";
+                        selectedImagePath = row["ImagePath"].ToString() ?? "";
+                        firstItem = false;
+                    }
+
+                    subtotal += Convert.ToDecimal(row["LineTotal"]);
+
                     Panel itemPanel = new Panel();
                     itemPanel.Width = 400;
                     itemPanel.Height = 60;
@@ -376,9 +402,10 @@ namespace Cosmatic_Shop_Management.Forms
                         string imagePath = row["ImagePath"].ToString() ?? "";
                         if (!string.IsNullOrWhiteSpace(imagePath) && File.Exists(imagePath))
                         {
-                            using (FileStream fs = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+                            byte[] bytes = File.ReadAllBytes(imagePath);
+                            using (MemoryStream ms = new MemoryStream(bytes))
+                            using (Image img = Image.FromStream(ms))
                             {
-                                Image img = Image.FromStream(fs);
                                 pic.Image = new Bitmap(img);
                             }
                         }
@@ -420,6 +447,10 @@ namespace Cosmatic_Shop_Management.Forms
 
                     flpOrderItems.Controls.Add(itemPanel);
                 }
+
+                lblSubtotalValue.Text = subtotal.ToString("0.00") + " Tk";
+                lblShippingValue.Text = "0.00 Tk";
+                lblTaxValue.Text = "0.00 Tk";
             }
             catch (Exception ex)
             {
@@ -435,10 +466,19 @@ namespace Cosmatic_Shop_Management.Forms
 
             btnCancelOrder.Enabled = canCancel;
             btnReorder.Enabled = true;
+            btnReview.Enabled =
+                status.Equals("Delivered", StringComparison.OrdinalIgnoreCase) ||
+                status.Equals("Completed", StringComparison.OrdinalIgnoreCase) ||
+                status.Equals("Shipped", StringComparison.OrdinalIgnoreCase);
         }
 
         private void ClearOrderDetails()
         {
+            selectedOrderId = 0;
+            selectedProductId = 0;
+            selectedProductName = "";
+            selectedImagePath = "";
+
             lblOrderIdValue.Text = "-";
             lblStatusValue.Text = "-";
             lblCustomerInfoValue.Text = "-";
@@ -450,6 +490,7 @@ namespace Cosmatic_Shop_Management.Forms
             flpOrderItems.Controls.Clear();
             btnCancelOrder.Enabled = false;
             btnReorder.Enabled = false;
+            btnReview.Enabled = false;
         }
 
         private void btnGoBack_Click(object? sender, EventArgs e)
@@ -657,10 +698,41 @@ namespace Cosmatic_Shop_Management.Forms
             MessageBox.Show("Invoice preview feature can be added next.");
         }
 
+        private void btnReview_Click(object? sender, EventArgs e)
+        {
+            try
+            {
+                if (selectedOrderId <= 0 || selectedProductId <= 0)
+                {
+                    MessageBox.Show("Please select a valid delivered order first.");
+                    return;
+                }
+
+                ReviewForm form = new ReviewForm(selectedProductId, selectedOrderId, selectedProductName, selectedImagePath);
+                form.ShowDialog();
+
+                LoadOrders();
+                ApplyFiltersAndBind();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Open review form error: " + ex.Message);
+            }
+        }
+
         private void label1_Click(object sender, EventArgs e)
         {
         }
+
         private void label2_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void MyOrdersForm_Load_1(object sender, EventArgs e)
+        {
+        }
+
+        private void pnlTopHeader_Paint(object sender, PaintEventArgs e)
         {
         }
     }

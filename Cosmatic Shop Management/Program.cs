@@ -12,7 +12,7 @@ namespace Cosmatic_Shop_Management
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run(new ReviewForm());
+            Application.Run(new LoginForm());
         }
     }
 }

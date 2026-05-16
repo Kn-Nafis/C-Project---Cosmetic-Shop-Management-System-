@@ -15,13 +15,19 @@ namespace Cosmatic_Shop_Management.Forms
         public CheckoutForm()
         {
             InitializeComponent();
+            InitializeCheckoutForm();
         }
 
         public CheckoutForm(int cartId)
         {
             InitializeComponent();
             this.cartId = cartId;
+            InitializeCheckoutForm();
+        }
 
+        private void InitializeCheckoutForm()
+        {
+            this.Load -= CheckoutForm_Load;
             this.Load += CheckoutForm_Load;
 
             btnConfirmPurchase.Click -= btnConfirmPurchase_Click;
@@ -34,9 +40,29 @@ namespace Cosmatic_Shop_Management.Forms
         private void CheckoutForm_Load(object sender, EventArgs e)
         {
             lblCheckoutTitle.Text = "Finalize Order";
+
+            if (SessionManager.UserId <= 0)
+            {
+                MessageBox.Show("Please login first.");
+                this.Close();
+                return;
+            }
+
+            if (cartId <= 0)
+            {
+                cartId = GetOrCreateCart(SessionManager.UserId);
+            }
+
             LoadCustomerInfo();
             LoadOrderSummary();
             LoadPaymentMethods();
+
+            if (dgvOrderSummary.DataSource == null || dgvOrderSummary.Rows.Count == 0)
+            {
+                MessageBox.Show("Your cart is empty.");
+                this.Close();
+                return;
+            }
         }
 
         private void LoadPaymentMethods()
@@ -117,6 +143,42 @@ namespace Cosmatic_Shop_Management.Forms
             }
         }
 
+        private int GetOrCreateCart(int customerUserId)
+        {
+            string findQuery = @"
+                SELECT TOP 1 CartId
+                FROM Cart
+                WHERE CustomerUserId = @CustomerUserId
+                ORDER BY CartId DESC
+            ";
+
+            SqlParameter[] findParams =
+            {
+                new SqlParameter("@CustomerUserId", customerUserId)
+            };
+
+            object result = DatabaseHelper.ExecuteScalar(findQuery, findParams);
+
+            if (result != null && result != DBNull.Value)
+            {
+                return Convert.ToInt32(result);
+            }
+
+            string insertQuery = @"
+                INSERT INTO Cart (CustomerUserId, CreatedAt)
+                VALUES (@CustomerUserId, GETDATE());
+                SELECT SCOPE_IDENTITY();
+            ";
+
+            SqlParameter[] insertParams =
+            {
+                new SqlParameter("@CustomerUserId", customerUserId)
+            };
+
+            object newCartId = DatabaseHelper.ExecuteScalar(insertQuery, insertParams);
+            return Convert.ToInt32(newCartId);
+        }
+
         private void btnConfirmPurchase_Click(object sender, EventArgs e)
         {
             if (txtFullName.Text.Trim() == "" || txtPhone.Text.Trim() == "" || txtAddress.Text.Trim() == "")
@@ -159,12 +221,12 @@ namespace Cosmatic_Shop_Management.Forms
                     WHERE CI.CartId = @CartId
                 ";
 
-                SqlParameter[] cartParams =
+                SqlParameter[] cartParamsForRead =
                 {
                     new SqlParameter("@CartId", cartId)
                 };
 
-                DataTable dt = DatabaseHelper.GetDataTable(cartItemsQuery, cartParams);
+                DataTable dt = DatabaseHelper.GetDataTable(cartItemsQuery, cartParamsForRead);
 
                 foreach (DataRow row in dt.Rows)
                 {
@@ -261,7 +323,12 @@ namespace Cosmatic_Shop_Management.Forms
                 DatabaseHelper.ExecuteNonQuery(commissionQuery, commissionParams);
 
                 string clearCartQuery = "DELETE FROM CartItems WHERE CartId = @CartId";
-                DatabaseHelper.ExecuteNonQuery(clearCartQuery, cartParams);
+                SqlParameter[] clearCartParams =
+                {
+                    new SqlParameter("@CartId", cartId)
+                };
+
+                DatabaseHelper.ExecuteNonQuery(clearCartQuery, clearCartParams);
 
                 MessageBox.Show("Purchase completed successfully.");
                 this.Close();

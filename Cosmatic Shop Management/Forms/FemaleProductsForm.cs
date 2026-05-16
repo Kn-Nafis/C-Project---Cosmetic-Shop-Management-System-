@@ -398,7 +398,9 @@ namespace Cosmatic_Shop_Management.Forms
 
         private void btnGoBack_Click(object? sender, EventArgs e)
         {
-            this.Close();
+            CustomerDashboardForm form = new CustomerDashboardForm();
+            form.Show();
+            this.Hide();
         }
 
         private void btnPrevPage_Click(object? sender, EventArgs e)
@@ -457,6 +459,11 @@ namespace Cosmatic_Shop_Management.Forms
             btn.BackColor = Color.Purple;
             btn.ForeColor = Color.White;
             btn.FlatStyle = FlatStyle.Flat;
+        }
+
+        private void btnGoBack_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

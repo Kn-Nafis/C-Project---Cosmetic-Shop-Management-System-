@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using Cosmatic_Shop_Management.DAL;
@@ -11,17 +12,38 @@ namespace Cosmatic_Shop_Management.Forms
     public partial class ReviewForm : Form
     {
         private int productId;
+        private int orderId;
+        private string productName = "";
+        private string imagePath = "";
 
         public ReviewForm()
         {
             InitializeComponent();
+            InitializeReviewEvents();
         }
 
         public ReviewForm(int productId)
         {
             InitializeComponent();
             this.productId = productId;
+            InitializeReviewEvents();
+        }
 
+        public ReviewForm(int productId, int orderId, string productName, string imagePath)
+        {
+            InitializeComponent();
+
+            this.productId = productId;
+            this.orderId = orderId;
+            this.productName = productName ?? "";
+            this.imagePath = imagePath ?? "";
+
+            InitializeReviewEvents();
+        }
+
+        private void InitializeReviewEvents()
+        {
+            this.Load -= ReviewForm_Load;
             this.Load += ReviewForm_Load;
 
             btnSubmitReview.Click -= btnSubmitReview_Click;
@@ -35,7 +57,16 @@ namespace Cosmatic_Shop_Management.Forms
         {
             lblReviewTitle.Text = "Product Feedback";
             LoadRatingOptions();
-            LoadProductInfo();
+
+            if (!string.IsNullOrWhiteSpace(productName))
+            {
+                lblProductName.Text = productName;
+                LoadProductImageFromPath(imagePath);
+            }
+            else
+            {
+                LoadProductInfo();
+            }
         }
 
         private void LoadRatingOptions()
@@ -73,12 +104,35 @@ namespace Cosmatic_Shop_Management.Forms
                     return;
                 }
 
-                lblProductName.Text = dt.Rows[0]["ProductName"].ToString();
+                lblProductName.Text = dt.Rows[0]["ProductName"].ToString() ?? "";
+                string dbImagePath = dt.Rows[0]["ImagePath"].ToString() ?? "";
+                LoadProductImageFromPath(dbImagePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Review product load error: " + ex.Message);
+            }
+        }
 
-                string imagePath = dt.Rows[0]["ImagePath"].ToString();
-                if (!string.IsNullOrWhiteSpace(imagePath) && System.IO.File.Exists(imagePath))
+        private void LoadProductImageFromPath(string path)
+        {
+            try
+            {
+                if (picReviewProduct.Image != null)
                 {
-                    picReviewProduct.Image = Image.FromFile(imagePath);
+                    picReviewProduct.Image.Dispose();
+                    picReviewProduct.Image = null;
+                }
+
+                if (!string.IsNullOrWhiteSpace(path) && File.Exists(path))
+                {
+                    byte[] bytes = File.ReadAllBytes(path);
+                    using (MemoryStream ms = new MemoryStream(bytes))
+                    using (Image temp = Image.FromStream(ms))
+                    {
+                        picReviewProduct.Image = new Bitmap(temp);
+                    }
+
                     picReviewProduct.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
                 else
@@ -86,9 +140,9 @@ namespace Cosmatic_Shop_Management.Forms
                     picReviewProduct.Image = null;
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show("Review product load error: " + ex.Message);
+                picReviewProduct.Image = null;
             }
         }
 
@@ -109,6 +163,27 @@ namespace Cosmatic_Shop_Management.Forms
             try
             {
                 int rating = Convert.ToInt32(cmbRating.Text);
+
+                string checkQuery = @"
+                    SELECT COUNT(*)
+                    FROM Reviews
+                    WHERE ProductId = @ProductId
+                      AND CustomerUserId = @CustomerUserId
+                ";
+
+                SqlParameter[] checkParams =
+                {
+                    new SqlParameter("@ProductId", productId),
+                    new SqlParameter("@CustomerUserId", SessionManager.UserId)
+                };
+
+                int alreadyReviewed = Convert.ToInt32(DatabaseHelper.ExecuteScalar(checkQuery, checkParams));
+
+                if (alreadyReviewed > 0)
+                {
+                    MessageBox.Show("You already reviewed this product.");
+                    return;
+                }
 
                 string query = @"
                     INSERT INTO Reviews
@@ -151,6 +226,10 @@ namespace Cosmatic_Shop_Management.Forms
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void ReviewForm_Load_1(object sender, EventArgs e)
+        {
         }
     }
 }

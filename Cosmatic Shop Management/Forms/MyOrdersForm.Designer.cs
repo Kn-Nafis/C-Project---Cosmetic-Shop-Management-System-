@@ -50,6 +50,7 @@
             lblFilterStatusTitle = new Label();
             dgvMyOrders = new DataGridView();
             pnlOrderDetails = new Panel();
+            btnReview = new Button();
             btnCancelOrder = new Button();
             btnReorder = new Button();
             lblTotalAmountValue = new Label();
@@ -101,6 +102,7 @@
             pnlTopHeader.Name = "pnlTopHeader";
             pnlTopHeader.Size = new Size(1358, 80);
             pnlTopHeader.TabIndex = 0;
+            pnlTopHeader.Paint += pnlTopHeader_Paint;
             // 
             // btnCart
             // 
@@ -362,7 +364,7 @@
             dgvMyOrders.RowHeadersVisible = false;
             dgvMyOrders.RowHeadersWidth = 62;
             dgvMyOrders.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvMyOrders.Size = new Size(820, 554);
+            dgvMyOrders.Size = new Size(820, 703);
             dgvMyOrders.TabIndex = 2;
             // 
             // pnlOrderDetails
@@ -395,8 +397,21 @@
             pnlOrderDetails.Controls.Add(lblOrderDetailsTitle);
             pnlOrderDetails.Location = new Point(865, 220);
             pnlOrderDetails.Name = "pnlOrderDetails";
-            pnlOrderDetails.Size = new Size(475, 554);
+            pnlOrderDetails.Size = new Size(475, 817);
             pnlOrderDetails.TabIndex = 3;
+            // 
+            // btnReview
+            // 
+            btnReview.BackColor = Color.Coral;
+            btnReview.FlatAppearance.BorderSize = 0;
+            btnReview.FlatStyle = FlatStyle.Flat;
+            btnReview.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnReview.Location = new Point(20, 942);
+            btnReview.Name = "btnReview";
+            btnReview.Size = new Size(160, 34);
+            btnReview.TabIndex = 38;
+            btnReview.Text = "Give Review";
+            btnReview.UseVisualStyleBackColor = false;
             // 
             // btnCancelOrder
             // 
@@ -406,7 +421,7 @@
             btnCancelOrder.FlatStyle = FlatStyle.Flat;
             btnCancelOrder.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCancelOrder.ForeColor = Color.FromArgb(74, 20, 140);
-            btnCancelOrder.Location = new Point(244, 739);
+            btnCancelOrder.Location = new Point(275, 666);
             btnCancelOrder.Name = "btnCancelOrder";
             btnCancelOrder.Size = new Size(190, 52);
             btnCancelOrder.TabIndex = 37;
@@ -421,7 +436,7 @@
             btnReorder.FlatStyle = FlatStyle.Flat;
             btnReorder.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnReorder.ForeColor = Color.White;
-            btnReorder.Location = new Point(11, 739);
+            btnReorder.Location = new Point(3, 666);
             btnReorder.Name = "btnReorder";
             btnReorder.Size = new Size(190, 52);
             btnReorder.TabIndex = 15;
@@ -520,7 +535,7 @@
             flpOrderItems.FlowDirection = FlowDirection.TopDown;
             flpOrderItems.Location = new Point(11, 306);
             flpOrderItems.Name = "flpOrderItems";
-            flpOrderItems.Size = new Size(430, 145);
+            flpOrderItems.Size = new Size(450, 145);
             flpOrderItems.TabIndex = 28;
             flpOrderItems.WrapContents = false;
             // 
@@ -540,7 +555,7 @@
             lblStatusValue.AutoSize = true;
             lblStatusValue.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             lblStatusValue.ForeColor = Color.Black;
-            lblStatusValue.Location = new Point(330, 127);
+            lblStatusValue.Location = new Point(309, 73);
             lblStatusValue.Name = "lblStatusValue";
             lblStatusValue.Size = new Size(74, 21);
             lblStatusValue.TabIndex = 26;
@@ -551,7 +566,7 @@
             lblStatusTitle.AutoSize = true;
             lblStatusTitle.Font = new Font("Segoe UI", 7F);
             lblStatusTitle.ForeColor = Color.Gray;
-            lblStatusTitle.Location = new Point(328, 106);
+            lblStatusTitle.Location = new Point(309, 53);
             lblStatusTitle.Name = "lblStatusTitle";
             lblStatusTitle.Size = new Size(54, 19);
             lblStatusTitle.TabIndex = 25;
@@ -562,7 +577,7 @@
             lblShippingAddressValue.AutoSize = true;
             lblShippingAddressValue.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             lblShippingAddressValue.ForeColor = Color.Black;
-            lblShippingAddressValue.Location = new Point(244, 197);
+            lblShippingAddressValue.Location = new Point(309, 122);
             lblShippingAddressValue.Name = "lblShippingAddressValue";
             lblShippingAddressValue.Size = new Size(104, 21);
             lblShippingAddressValue.TabIndex = 24;
@@ -573,7 +588,7 @@
             lblShippingAddressTitle.AutoSize = true;
             lblShippingAddressTitle.Font = new Font("Segoe UI", 7F);
             lblShippingAddressTitle.ForeColor = Color.Gray;
-            lblShippingAddressTitle.Location = new Point(242, 176);
+            lblShippingAddressTitle.Location = new Point(309, 103);
             lblShippingAddressTitle.Name = "lblShippingAddressTitle";
             lblShippingAddressTitle.Size = new Size(132, 19);
             lblShippingAddressTitle.TabIndex = 23;
@@ -584,7 +599,7 @@
             lblCustomerInfoValue.AutoSize = true;
             lblCustomerInfoValue.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             lblCustomerInfoValue.ForeColor = Color.Black;
-            lblCustomerInfoValue.Location = new Point(3, 197);
+            lblCustomerInfoValue.Location = new Point(3, 122);
             lblCustomerInfoValue.Name = "lblCustomerInfoValue";
             lblCustomerInfoValue.Size = new Size(229, 21);
             lblCustomerInfoValue.TabIndex = 22;
@@ -595,7 +610,7 @@
             lblCustomerInfoTitle.AutoSize = true;
             lblCustomerInfoTitle.Font = new Font("Segoe UI", 7F);
             lblCustomerInfoTitle.ForeColor = Color.Gray;
-            lblCustomerInfoTitle.Location = new Point(3, 176);
+            lblCustomerInfoTitle.Location = new Point(3, 103);
             lblCustomerInfoTitle.Name = "lblCustomerInfoTitle";
             lblCustomerInfoTitle.Size = new Size(116, 19);
             lblCustomerInfoTitle.TabIndex = 21;
@@ -606,7 +621,7 @@
             lblOrderIdValue.AutoSize = true;
             lblOrderIdValue.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblOrderIdValue.ForeColor = Color.Black;
-            lblOrderIdValue.Location = new Point(3, 120);
+            lblOrderIdValue.Location = new Point(4, 73);
             lblOrderIdValue.Name = "lblOrderIdValue";
             lblOrderIdValue.Size = new Size(206, 30);
             lblOrderIdValue.TabIndex = 20;
@@ -616,7 +631,7 @@
             // 
             lblOrderIdTitle.AutoSize = true;
             lblOrderIdTitle.ForeColor = Color.Gray;
-            lblOrderIdTitle.Location = new Point(3, 95);
+            lblOrderIdTitle.Location = new Point(3, 48);
             lblOrderIdTitle.Name = "lblOrderIdTitle";
             lblOrderIdTitle.Size = new Size(93, 25);
             lblOrderIdTitle.TabIndex = 19;
@@ -630,7 +645,7 @@
             btnOrderMail.FlatStyle = FlatStyle.Flat;
             btnOrderMail.Font = new Font("Segoe UI Emoji", 10F);
             btnOrderMail.ForeColor = Color.FromArgb(74, 20, 140);
-            btnOrderMail.Location = new Point(410, 18);
+            btnOrderMail.Location = new Point(410, 3);
             btnOrderMail.Name = "btnOrderMail";
             btnOrderMail.Size = new Size(51, 50);
             btnOrderMail.TabIndex = 18;
@@ -645,7 +660,7 @@
             btnViewInvoice.FlatStyle = FlatStyle.Flat;
             btnViewInvoice.Font = new Font("Segoe UI Emoji", 10F);
             btnViewInvoice.ForeColor = Color.White;
-            btnViewInvoice.Location = new Point(354, 18);
+            btnViewInvoice.Location = new Point(354, 0);
             btnViewInvoice.Name = "btnViewInvoice";
             btnViewInvoice.Size = new Size(50, 50);
             btnViewInvoice.TabIndex = 17;
@@ -658,7 +673,7 @@
             lblOrderDetailsTitle.BackColor = Color.Transparent;
             lblOrderDetailsTitle.Font = new Font("Segoe UI", 18F);
             lblOrderDetailsTitle.ForeColor = Color.FromArgb(74, 20, 140);
-            lblOrderDetailsTitle.Location = new Point(20, 20);
+            lblOrderDetailsTitle.Location = new Point(3, 0);
             lblOrderDetailsTitle.Name = "lblOrderDetailsTitle";
             lblOrderDetailsTitle.Size = new Size(230, 48);
             lblOrderDetailsTitle.TabIndex = 0;
@@ -670,7 +685,7 @@
             btnNextPage.BackColor = Color.White;
             btnNextPage.FlatAppearance.BorderSize = 0;
             btnNextPage.FlatStyle = FlatStyle.Flat;
-            btnNextPage.Location = new Point(800, 791);
+            btnNextPage.Location = new Point(800, 940);
             btnNextPage.Name = "btnNextPage";
             btnNextPage.Size = new Size(40, 36);
             btnNextPage.TabIndex = 42;
@@ -683,7 +698,7 @@
             btnPage3.BackColor = Color.White;
             btnPage3.FlatAppearance.BorderSize = 0;
             btnPage3.FlatStyle = FlatStyle.Flat;
-            btnPage3.Location = new Point(755, 791);
+            btnPage3.Location = new Point(755, 940);
             btnPage3.Name = "btnPage3";
             btnPage3.Size = new Size(40, 36);
             btnPage3.TabIndex = 41;
@@ -696,7 +711,7 @@
             btnPage2.BackColor = Color.White;
             btnPage2.FlatAppearance.BorderSize = 0;
             btnPage2.FlatStyle = FlatStyle.Flat;
-            btnPage2.Location = new Point(710, 791);
+            btnPage2.Location = new Point(710, 940);
             btnPage2.Name = "btnPage2";
             btnPage2.Size = new Size(40, 36);
             btnPage2.TabIndex = 40;
@@ -709,7 +724,7 @@
             btnPage1.BackColor = Color.White;
             btnPage1.FlatAppearance.BorderSize = 0;
             btnPage1.FlatStyle = FlatStyle.Flat;
-            btnPage1.Location = new Point(665, 791);
+            btnPage1.Location = new Point(665, 940);
             btnPage1.Name = "btnPage1";
             btnPage1.Size = new Size(40, 36);
             btnPage1.TabIndex = 39;
@@ -722,7 +737,7 @@
             btnPrevPage.BackColor = Color.White;
             btnPrevPage.FlatAppearance.BorderSize = 0;
             btnPrevPage.FlatStyle = FlatStyle.Flat;
-            btnPrevPage.Location = new Point(620, 791);
+            btnPrevPage.Location = new Point(620, 940);
             btnPrevPage.Name = "btnPrevPage";
             btnPrevPage.Size = new Size(40, 36);
             btnPrevPage.TabIndex = 38;
@@ -735,7 +750,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.Beige;
-            ClientSize = new Size(1358, 894);
+            ClientSize = new Size(1358, 1043);
+            Controls.Add(btnReview);
             Controls.Add(btnNextPage);
             Controls.Add(pnlOrderDetails);
             Controls.Add(btnPage3);
@@ -749,6 +765,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MyOrdersForm";
             WindowState = FormWindowState.Maximized;
+            Load += MyOrdersForm_Load_1;
             pnlTopHeader.ResumeLayout(false);
             pnlTopHeader.PerformLayout();
             pnlOrderFilters.ResumeLayout(false);
@@ -810,5 +827,6 @@
         private Button btnPage1;
         private Button btnPrevPage;
         private Button btnGoBack;
+        private Button btnReview;
     }
 }

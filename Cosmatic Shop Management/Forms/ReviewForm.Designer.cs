@@ -202,6 +202,7 @@
             Name = "ReviewForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ReviewForm";
+            Load += ReviewForm_Load_1;
             pnlReviewProduct.ResumeLayout(false);
             pnlReviewProduct.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picReviewProduct).EndInit();

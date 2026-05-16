@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductDetailsForm));
             pnlImageSection = new Panel();
             picProductImage = new PictureBox();
             label1 = new Label();
@@ -46,7 +45,6 @@
             lblShopName = new Label();
             lblPrice = new Label();
             lblProductName = new Label();
-            btnLogout = new Button();
             btnGoBack = new Button();
             pnlImageSection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picProductImage).BeginInit();
@@ -56,18 +54,20 @@
             // 
             // pnlImageSection
             // 
-            pnlImageSection.BackColor = Color.FloralWhite;
+            pnlImageSection.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pnlImageSection.BackColor = Color.Snow;
             pnlImageSection.Controls.Add(picProductImage);
             pnlImageSection.Location = new Point(83, 155);
             pnlImageSection.Name = "pnlImageSection";
-            pnlImageSection.Size = new Size(424, 415);
+            pnlImageSection.Size = new Size(424, 848);
             pnlImageSection.TabIndex = 0;
             // 
             // picProductImage
             // 
-            picProductImage.Location = new Point(43, 41);
+            picProductImage.Dock = DockStyle.Fill;
+            picProductImage.Location = new Point(0, 0);
             picProductImage.Name = "picProductImage";
-            picProductImage.Size = new Size(333, 337);
+            picProductImage.Size = new Size(424, 848);
             picProductImage.TabIndex = 0;
             picProductImage.TabStop = false;
             // 
@@ -76,7 +76,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(74, 20, 140);
-            label1.Location = new Point(83, 77);
+            label1.Location = new Point(172, 12);
             label1.Name = "label1";
             label1.Size = new Size(294, 48);
             label1.TabIndex = 1;
@@ -84,7 +84,8 @@
             // 
             // pnlDetailsSection
             // 
-            pnlDetailsSection.BackColor = Color.FloralWhite;
+            pnlDetailsSection.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pnlDetailsSection.BackColor = Color.Beige;
             pnlDetailsSection.Controls.Add(flpReviews);
             pnlDetailsSection.Controls.Add(lblReviewCount);
             pnlDetailsSection.Controls.Add(lblAverageRating);
@@ -228,7 +229,7 @@
             lblPrice.AutoSize = true;
             lblPrice.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPrice.ForeColor = Color.FromArgb(74, 20, 140);
-            lblPrice.Location = new Point(472, 67);
+            lblPrice.Location = new Point(484, 52);
             lblPrice.Name = "lblPrice";
             lblPrice.Size = new Size(94, 45);
             lblPrice.TabIndex = 1;
@@ -237,33 +238,23 @@
             // lblProductName
             // 
             lblProductName.AutoSize = true;
-            lblProductName.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblProductName.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             lblProductName.ForeColor = Color.FromArgb(74, 20, 140);
             lblProductName.Location = new Point(42, 49);
             lblProductName.Name = "lblProductName";
-            lblProductName.Size = new Size(108, 45);
+            lblProductName.Size = new Size(119, 48);
             lblProductName.TabIndex = 0;
             lblProductName.Text = "Name";
             lblProductName.Click += label2_Click;
-            // 
-            // btnLogout
-            // 
-            btnLogout.BackColor = Color.Coral;
-            btnLogout.FlatStyle = FlatStyle.Flat;
-            btnLogout.Image = (Image)resources.GetObject("btnLogout.Image");
-            btnLogout.Location = new Point(12, 963);
-            btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(40, 40);
-            btnLogout.TabIndex = 2;
-            btnLogout.UseVisualStyleBackColor = false;
             // 
             // btnGoBack
             // 
             btnGoBack.BackColor = Color.Coral;
             btnGoBack.FlatStyle = FlatStyle.Flat;
+            btnGoBack.Font = new Font("Segoe UI Emoji", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGoBack.Location = new Point(12, 12);
             btnGoBack.Name = "btnGoBack";
-            btnGoBack.Size = new Size(152, 37);
+            btnGoBack.Size = new Size(134, 45);
             btnGoBack.TabIndex = 3;
             btnGoBack.Text = "⇦ Go Back";
             btnGoBack.UseVisualStyleBackColor = false;
@@ -272,16 +263,16 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Beige;
+            BackColor = Color.White;
             ClientSize = new Size(1427, 1047);
             Controls.Add(btnGoBack);
-            Controls.Add(btnLogout);
             Controls.Add(pnlDetailsSection);
             Controls.Add(label1);
             Controls.Add(pnlImageSection);
             Name = "ProductDetailsForm";
             Text = "ProductDetailsForm";
             WindowState = FormWindowState.Maximized;
+            Load += ProductDetailsForm_Load_1;
             pnlImageSection.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)picProductImage).EndInit();
             pnlDetailsSection.ResumeLayout(false);
@@ -310,7 +301,6 @@
         private FlowLayoutPanel flpReviews;
         private Label lblReviewCount;
         private Label lblAverageRating;
-        private Button btnLogout;
         private Button btnGoBack;
     }
 }

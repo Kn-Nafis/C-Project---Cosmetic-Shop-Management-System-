@@ -11,7 +11,12 @@ namespace Cosmatic_Shop_Management.Forms
     public partial class ManageShopForm : Form
     {
         private string selectedLogoPath = "";
-
+        private int shopId = 0;
+        public ManageShopForm(int shopId)
+        {
+            InitializeComponent();
+            this.shopId = shopId;
+        }
         public ManageShopForm()
         {
             InitializeComponent();

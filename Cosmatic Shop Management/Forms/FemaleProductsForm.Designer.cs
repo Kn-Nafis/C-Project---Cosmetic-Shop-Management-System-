@@ -76,6 +76,7 @@
             btnGoBack.TabIndex = 0;
             btnGoBack.Text = "← Back to Dashboard";
             btnGoBack.UseVisualStyleBackColor = true;
+            btnGoBack.Click += btnGoBack_Click_1;
             // 
             // panel1
             // 

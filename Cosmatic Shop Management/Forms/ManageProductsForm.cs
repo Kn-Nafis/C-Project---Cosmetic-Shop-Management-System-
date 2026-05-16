@@ -20,6 +20,9 @@ namespace Cosmatic_Shop_Management.Forms
             btnAddProduct.Click -= btnAddProduct_Click;
             btnAddProduct.Click += btnAddProduct_Click;
 
+            btnEditProduct.Click -= btnEditProduct_Click;
+            btnEditProduct.Click += btnEditProduct_Click;
+
             btnApplyFilters.Click -= btnApplyFilters_Click;
             btnApplyFilters.Click += btnApplyFilters_Click;
 
@@ -240,6 +243,37 @@ namespace Cosmatic_Shop_Management.Forms
             LoadProducts();
             LoadSummaryCards();
             LoadLowStockAlert();
+        }
+
+        private void btnEditProduct_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvProducts.CurrentRow == null)
+                {
+                    MessageBox.Show("Please select a product first.");
+                    return;
+                }
+
+                if (dgvProducts.CurrentRow.Cells["ID"].Value == null)
+                {
+                    MessageBox.Show("Invalid product selection.");
+                    return;
+                }
+
+                int selectedProductId = Convert.ToInt32(dgvProducts.CurrentRow.Cells["ID"].Value);
+
+                EditProductForm form = new EditProductForm(selectedProductId);
+                form.ShowDialog();
+
+                LoadProducts();
+                LoadSummaryCards();
+                LoadLowStockAlert();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Open edit form error: " + ex.Message);
+            }
         }
 
         private void btnGoBack_Click(object sender, EventArgs e)

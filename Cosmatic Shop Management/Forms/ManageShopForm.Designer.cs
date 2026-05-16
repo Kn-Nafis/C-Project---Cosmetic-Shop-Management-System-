@@ -101,7 +101,7 @@
             btnSaveChanges.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSaveChanges.Location = new Point(518, 551);
             btnSaveChanges.Name = "btnSaveChanges";
-            btnSaveChanges.Size = new Size(202, 34);
+            btnSaveChanges.Size = new Size(202, 46);
             btnSaveChanges.TabIndex = 15;
             btnSaveChanges.Text = "Save Changes";
             btnSaveChanges.UseVisualStyleBackColor = false;
@@ -116,7 +116,7 @@
             btnClearForm.ForeColor = Color.FromArgb(74, 20, 140);
             btnClearForm.Location = new Point(403, 551);
             btnClearForm.Name = "btnClearForm";
-            btnClearForm.Size = new Size(112, 34);
+            btnClearForm.Size = new Size(112, 46);
             btnClearForm.TabIndex = 14;
             btnClearForm.Text = "Clear Form";
             btnClearForm.UseVisualStyleBackColor = true;

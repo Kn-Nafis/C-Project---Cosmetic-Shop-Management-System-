@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using Cosmatic_Shop_Management.DAL;
@@ -15,6 +16,20 @@ namespace Cosmatic_Shop_Management.Forms
         public ProductDetailsForm()
         {
             InitializeComponent();
+
+            this.Load += ProductDetailsForm_Load;
+
+            btnAddToCart.Click -= btnAddToCart_Click;
+            btnAddToCart.Click += btnAddToCart_Click;
+
+            btnBuyNow.Click -= btnBuyNow_Click;
+            btnBuyNow.Click += btnBuyNow_Click;
+
+            btnGoBack.Click -= btnGoBack_Click;
+            btnGoBack.Click += btnGoBack_Click;
+
+            /*btnLogout.Click -= btnLogout_Click;
+            btnLogout.Click += btnLogout_Click;*/
         }
 
         public ProductDetailsForm(int productId)
@@ -33,8 +48,8 @@ namespace Cosmatic_Shop_Management.Forms
             btnGoBack.Click -= btnGoBack_Click;
             btnGoBack.Click += btnGoBack_Click;
 
-            btnLogout.Click -= btnLogout_Click;
-            btnLogout.Click += btnLogout_Click;
+            /*btnLogout.Click -= btnLogout_Click;
+            btnLogout.Click += btnLogout_Click;*/
         }
 
         private void ProductDetailsForm_Load(object sender, EventArgs e)
@@ -109,15 +124,7 @@ namespace Cosmatic_Shop_Management.Forms
                 lblReviewCount.Text = "(" + row["ReviewCount"].ToString() + " reviews)";
 
                 string imagePath = row["ImagePath"].ToString();
-                if (!string.IsNullOrWhiteSpace(imagePath) && System.IO.File.Exists(imagePath))
-                {
-                    picProductImage.Image = Image.FromFile(imagePath);
-                    picProductImage.SizeMode = PictureBoxSizeMode.StretchImage;
-                }
-                else
-                {
-                    picProductImage.Image = null;
-                }
+                LoadProductImage(imagePath);
 
                 nudQuantity.Minimum = 1;
                 nudQuantity.Maximum = stockQty > 0 ? stockQty : 1;
@@ -129,6 +136,38 @@ namespace Cosmatic_Shop_Management.Forms
             catch (Exception ex)
             {
                 MessageBox.Show("Product details load error: " + ex.Message);
+            }
+        }
+
+        private void LoadProductImage(string imagePath)
+        {
+            try
+            {
+                if (picProductImage.Image != null)
+                {
+                    picProductImage.Image.Dispose();
+                    picProductImage.Image = null;
+                }
+
+                if (!string.IsNullOrWhiteSpace(imagePath) && File.Exists(imagePath))
+                {
+                    byte[] bytes = File.ReadAllBytes(imagePath);
+                    using (MemoryStream ms = new MemoryStream(bytes))
+                    using (Image temp = Image.FromStream(ms))
+                    {
+                        picProductImage.Image = new Bitmap(temp);
+                    }
+
+                    picProductImage.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+                else
+                {
+                    picProductImage.Image = null;
+                }
+            }
+            catch
+            {
+                picProductImage.Image = null;
             }
         }
 
@@ -209,10 +248,16 @@ namespace Cosmatic_Shop_Management.Forms
             AddToCart(true);
         }
 
-        private void AddToCart(bool openCartAfterAdd)
+        private void AddToCart(bool openCheckoutAfterAdd)
         {
             try
             {
+                if (SessionManager.UserId <= 0)
+                {
+                    MessageBox.Show("Please login first.");
+                    return;
+                }
+
                 int quantity = Convert.ToInt32(nudQuantity.Value);
                 int cartId = GetOrCreateCart(SessionManager.UserId);
 
@@ -264,9 +309,11 @@ namespace Cosmatic_Shop_Management.Forms
                     DatabaseHelper.ExecuteNonQuery(insertQuery, insertParams);
                 }
 
-                if (openCartAfterAdd)
+                if (openCheckoutAfterAdd)
                 {
-                    CartForm form = new CartForm();
+                    CheckoutForm form = new CheckoutForm();
+                    this.Hide();
+                    form.FormClosed += (s, args) => this.Close();
                     form.Show();
                 }
                 else
@@ -289,12 +336,12 @@ namespace Cosmatic_Shop_Management.Forms
                 ORDER BY CartId DESC
             ";
 
-            SqlParameter[] parameters =
+            SqlParameter[] findParams =
             {
                 new SqlParameter("@CustomerUserId", customerUserId)
             };
 
-            object result = DatabaseHelper.ExecuteScalar(findQuery, parameters);
+            object result = DatabaseHelper.ExecuteScalar(findQuery, findParams);
 
             if (result != null && result != DBNull.Value)
             {
@@ -302,12 +349,17 @@ namespace Cosmatic_Shop_Management.Forms
             }
 
             string insertQuery = @"
-                INSERT INTO Cart (CustomerUserId)
-                VALUES (@CustomerUserId);
+                INSERT INTO Cart (CustomerUserId, CreatedAt)
+                VALUES (@CustomerUserId, GETDATE());
                 SELECT SCOPE_IDENTITY();
             ";
 
-            object newCartId = DatabaseHelper.ExecuteScalar(insertQuery, parameters);
+            SqlParameter[] insertParams =
+            {
+                new SqlParameter("@CustomerUserId", customerUserId)
+            };
+
+            object newCartId = DatabaseHelper.ExecuteScalar(insertQuery, insertParams);
             return Convert.ToInt32(newCartId);
         }
 
@@ -326,6 +378,10 @@ namespace Cosmatic_Shop_Management.Forms
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void ProductDetailsForm_Load_1(object sender, EventArgs e)
         {
         }
     }

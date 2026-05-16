@@ -30,17 +30,17 @@
         {
             lblAdminName = new Label();
             pnlTotalProducts = new Panel();
-            pnlTotalOrders = new Panel();
-            pnlGrossSales = new Panel();
-            pnlNetIncome = new Panel();
-            lblTotalProductsTitle = new Label();
-            lblTotalOrdersTitle = new Label();
-            lblGrossSalesTitle = new Label();
-            blNetIncomeTitle = new Label();
             lblTotalProducts = new Label();
+            lblTotalProductsTitle = new Label();
+            pnlTotalOrders = new Panel();
             lblTotalOrders = new Label();
+            lblTotalOrdersTitle = new Label();
+            pnlGrossSales = new Panel();
             lblGrossSales = new Label();
+            lblGrossSalesTitle = new Label();
+            pnlNetIncome = new Panel();
             lblNetIncome = new Label();
+            blNetIncomeTitle = new Label();
             pnlLowStock = new Panel();
             lblLowStock = new Label();
             lblLowStockTitle = new Label();
@@ -82,75 +82,6 @@
             pnlTotalProducts.Size = new Size(168, 168);
             pnlTotalProducts.TabIndex = 1;
             // 
-            // pnlTotalOrders
-            // 
-            pnlTotalOrders.BackColor = Color.White;
-            pnlTotalOrders.BorderStyle = BorderStyle.FixedSingle;
-            pnlTotalOrders.Controls.Add(lblTotalOrders);
-            pnlTotalOrders.Controls.Add(lblTotalOrdersTitle);
-            pnlTotalOrders.Location = new Point(269, 108);
-            pnlTotalOrders.Name = "pnlTotalOrders";
-            pnlTotalOrders.Size = new Size(168, 168);
-            pnlTotalOrders.TabIndex = 2;
-            // 
-            // pnlGrossSales
-            // 
-            pnlGrossSales.BackColor = Color.White;
-            pnlGrossSales.BorderStyle = BorderStyle.FixedSingle;
-            pnlGrossSales.Controls.Add(lblGrossSales);
-            pnlGrossSales.Controls.Add(lblGrossSalesTitle);
-            pnlGrossSales.Location = new Point(506, 108);
-            pnlGrossSales.Name = "pnlGrossSales";
-            pnlGrossSales.Size = new Size(168, 168);
-            pnlGrossSales.TabIndex = 2;
-            // 
-            // pnlNetIncome
-            // 
-            pnlNetIncome.BackColor = Color.White;
-            pnlNetIncome.BorderStyle = BorderStyle.FixedSingle;
-            pnlNetIncome.Controls.Add(lblNetIncome);
-            pnlNetIncome.Controls.Add(blNetIncomeTitle);
-            pnlNetIncome.Location = new Point(739, 108);
-            pnlNetIncome.Name = "pnlNetIncome";
-            pnlNetIncome.Size = new Size(168, 168);
-            pnlNetIncome.TabIndex = 2;
-            // 
-            // lblTotalProductsTitle
-            // 
-            lblTotalProductsTitle.AutoSize = true;
-            lblTotalProductsTitle.Location = new Point(3, 29);
-            lblTotalProductsTitle.Name = "lblTotalProductsTitle";
-            lblTotalProductsTitle.Size = new Size(124, 25);
-            lblTotalProductsTitle.TabIndex = 0;
-            lblTotalProductsTitle.Text = "Total Products";
-            // 
-            // lblTotalOrdersTitle
-            // 
-            lblTotalOrdersTitle.AutoSize = true;
-            lblTotalOrdersTitle.Location = new Point(3, 29);
-            lblTotalOrdersTitle.Name = "lblTotalOrdersTitle";
-            lblTotalOrdersTitle.Size = new Size(108, 25);
-            lblTotalOrdersTitle.TabIndex = 1;
-            lblTotalOrdersTitle.Text = "Total Orders";
-            // 
-            // lblGrossSalesTitle
-            // 
-            lblGrossSalesTitle.AutoSize = true;
-            lblGrossSalesTitle.Location = new Point(3, 29);
-            lblGrossSalesTitle.Name = "lblGrossSalesTitle";
-            lblGrossSalesTitle.Size = new Size(102, 25);
-            lblGrossSalesTitle.TabIndex = 2;
-            lblGrossSalesTitle.Text = "Gross Sales";
-            // 
-            // blNetIncomeTitle
-            // 
-            blNetIncomeTitle.AutoSize = true;
-            blNetIncomeTitle.Location = new Point(3, 29);
-            blNetIncomeTitle.Name = "blNetIncomeTitle";
-            blNetIncomeTitle.Size = new Size(104, 25);
-            blNetIncomeTitle.TabIndex = 3;
-            blNetIncomeTitle.Text = "Net Income";
-            // 
             // lblTotalProducts
             // 
             lblTotalProducts.AutoSize = true;
@@ -161,6 +92,26 @@
             lblTotalProducts.Size = new Size(101, 45);
             lblTotalProducts.TabIndex = 1;
             lblTotalProducts.Text = "Value";
+            // 
+            // lblTotalProductsTitle
+            // 
+            lblTotalProductsTitle.AutoSize = true;
+            lblTotalProductsTitle.Location = new Point(3, 29);
+            lblTotalProductsTitle.Name = "lblTotalProductsTitle";
+            lblTotalProductsTitle.Size = new Size(124, 25);
+            lblTotalProductsTitle.TabIndex = 0;
+            lblTotalProductsTitle.Text = "Total Products";
+            // 
+            // pnlTotalOrders
+            // 
+            pnlTotalOrders.BackColor = Color.White;
+            pnlTotalOrders.BorderStyle = BorderStyle.FixedSingle;
+            pnlTotalOrders.Controls.Add(lblTotalOrders);
+            pnlTotalOrders.Controls.Add(lblTotalOrdersTitle);
+            pnlTotalOrders.Location = new Point(269, 108);
+            pnlTotalOrders.Name = "pnlTotalOrders";
+            pnlTotalOrders.Size = new Size(168, 168);
+            pnlTotalOrders.TabIndex = 2;
             // 
             // lblTotalOrders
             // 
@@ -173,6 +124,26 @@
             lblTotalOrders.TabIndex = 2;
             lblTotalOrders.Text = "Value";
             // 
+            // lblTotalOrdersTitle
+            // 
+            lblTotalOrdersTitle.AutoSize = true;
+            lblTotalOrdersTitle.Location = new Point(3, 29);
+            lblTotalOrdersTitle.Name = "lblTotalOrdersTitle";
+            lblTotalOrdersTitle.Size = new Size(108, 25);
+            lblTotalOrdersTitle.TabIndex = 1;
+            lblTotalOrdersTitle.Text = "Total Orders";
+            // 
+            // pnlGrossSales
+            // 
+            pnlGrossSales.BackColor = Color.White;
+            pnlGrossSales.BorderStyle = BorderStyle.FixedSingle;
+            pnlGrossSales.Controls.Add(lblGrossSales);
+            pnlGrossSales.Controls.Add(lblGrossSalesTitle);
+            pnlGrossSales.Location = new Point(506, 108);
+            pnlGrossSales.Name = "pnlGrossSales";
+            pnlGrossSales.Size = new Size(168, 168);
+            pnlGrossSales.TabIndex = 2;
+            // 
             // lblGrossSales
             // 
             lblGrossSales.AutoSize = true;
@@ -184,6 +155,26 @@
             lblGrossSales.TabIndex = 3;
             lblGrossSales.Text = "Value";
             // 
+            // lblGrossSalesTitle
+            // 
+            lblGrossSalesTitle.AutoSize = true;
+            lblGrossSalesTitle.Location = new Point(3, 29);
+            lblGrossSalesTitle.Name = "lblGrossSalesTitle";
+            lblGrossSalesTitle.Size = new Size(102, 25);
+            lblGrossSalesTitle.TabIndex = 2;
+            lblGrossSalesTitle.Text = "Gross Sales";
+            // 
+            // pnlNetIncome
+            // 
+            pnlNetIncome.BackColor = Color.White;
+            pnlNetIncome.BorderStyle = BorderStyle.FixedSingle;
+            pnlNetIncome.Controls.Add(lblNetIncome);
+            pnlNetIncome.Controls.Add(blNetIncomeTitle);
+            pnlNetIncome.Location = new Point(739, 108);
+            pnlNetIncome.Name = "pnlNetIncome";
+            pnlNetIncome.Size = new Size(168, 168);
+            pnlNetIncome.TabIndex = 2;
+            // 
             // lblNetIncome
             // 
             lblNetIncome.AutoSize = true;
@@ -194,6 +185,15 @@
             lblNetIncome.Size = new Size(101, 45);
             lblNetIncome.TabIndex = 3;
             lblNetIncome.Text = "Value";
+            // 
+            // blNetIncomeTitle
+            // 
+            blNetIncomeTitle.AutoSize = true;
+            blNetIncomeTitle.Location = new Point(3, 29);
+            blNetIncomeTitle.Name = "blNetIncomeTitle";
+            blNetIncomeTitle.Size = new Size(104, 25);
+            blNetIncomeTitle.TabIndex = 3;
+            blNetIncomeTitle.Text = "Net Income";
             // 
             // pnlLowStock
             // 
@@ -297,6 +297,7 @@
             btnReports.TabIndex = 9;
             btnReports.Text = "Reports";
             btnReports.UseVisualStyleBackColor = false;
+            btnReports.Visible = false;
             // 
             // btnEmployees
             // 
@@ -311,6 +312,7 @@
             btnEmployees.TabIndex = 10;
             btnEmployees.Text = "Employees";
             btnEmployees.UseVisualStyleBackColor = false;
+            btnEmployees.Visible = false;
             // 
             // btnLogout
             // 

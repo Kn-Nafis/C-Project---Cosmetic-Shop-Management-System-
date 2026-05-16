@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             pnlLowStockAlert = new Panel();
-            lblLowStockAlert = new Label();
             lnkViewDetails = new LinkLabel();
+            lblLowStockAlert = new Label();
             lblManageProductsTitle = new Label();
             lblManageProductsSubtitle = new Label();
             btnAddProduct = new Button();
             pnlFilters = new Panel();
-            lblSearchProductsTitle = new Label();
-            txtSearchProducts = new TextBox();
-            lblCategoryFilterTitle = new Label();
-            cmbCategoryFilter = new ComboBox();
-            lblStockStatusFilterTitle = new Label();
-            cmbStockStatusFilter = new ComboBox();
             btnApplyFilters = new Button();
+            cmbStockStatusFilter = new ComboBox();
+            lblStockStatusFilterTitle = new Label();
+            cmbCategoryFilter = new ComboBox();
+            lblCategoryFilterTitle = new Label();
+            txtSearchProducts = new TextBox();
+            lblSearchProductsTitle = new Label();
             dgvProducts = new DataGridView();
             pnlInventoryValue = new Panel();
-            lblInventoryValueTitle = new Label();
             lblInventoryValue = new Label();
+            lblInventoryValueTitle = new Label();
             pnlTopCategory = new Panel();
             lblTopSellingCategory = new Label();
             lblTopCategoryTitle = new Label();
@@ -53,6 +53,7 @@
             lblStockHealth = new Label();
             lblStockHealthTitle = new Label();
             btnGoBack = new Button();
+            btnEditProduct = new Button();
             pnlLowStockAlert.SuspendLayout();
             pnlFilters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProducts).BeginInit();
@@ -72,6 +73,17 @@
             pnlLowStockAlert.Size = new Size(817, 58);
             pnlLowStockAlert.TabIndex = 0;
             // 
+            // lnkViewDetails
+            // 
+            lnkViewDetails.AutoSize = true;
+            lnkViewDetails.LinkColor = Color.Firebrick;
+            lnkViewDetails.Location = new Point(703, 21);
+            lnkViewDetails.Name = "lnkViewDetails";
+            lnkViewDetails.Size = new Size(107, 25);
+            lnkViewDetails.TabIndex = 1;
+            lnkViewDetails.TabStop = true;
+            lnkViewDetails.Text = "View Details";
+            // 
             // lblLowStockAlert
             // 
             lblLowStockAlert.AutoSize = true;
@@ -84,17 +96,6 @@
             lblLowStockAlert.Size = new Size(187, 30);
             lblLowStockAlert.TabIndex = 0;
             lblLowStockAlert.Text = "Low Stock Alert: ";
-            // 
-            // lnkViewDetails
-            // 
-            lnkViewDetails.AutoSize = true;
-            lnkViewDetails.LinkColor = Color.Firebrick;
-            lnkViewDetails.Location = new Point(703, 21);
-            lnkViewDetails.Name = "lnkViewDetails";
-            lnkViewDetails.Size = new Size(107, 25);
-            lnkViewDetails.TabIndex = 1;
-            lnkViewDetails.TabStop = true;
-            lnkViewDetails.Text = "View Details";
             // 
             // lblManageProductsTitle
             // 
@@ -151,76 +152,6 @@
             pnlFilters.Size = new Size(883, 84);
             pnlFilters.TabIndex = 4;
             // 
-            // lblSearchProductsTitle
-            // 
-            lblSearchProductsTitle.AutoSize = true;
-            lblSearchProductsTitle.BackColor = Color.Transparent;
-            lblSearchProductsTitle.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSearchProductsTitle.ForeColor = Color.Black;
-            lblSearchProductsTitle.Location = new Point(16, 0);
-            lblSearchProductsTitle.Name = "lblSearchProductsTitle";
-            lblSearchProductsTitle.Size = new Size(198, 28);
-            lblSearchProductsTitle.TabIndex = 0;
-            lblSearchProductsTitle.Text = "SEARCH PRODUCTS";
-            // 
-            // txtSearchProducts
-            // 
-            txtSearchProducts.BackColor = Color.White;
-            txtSearchProducts.BorderStyle = BorderStyle.FixedSingle;
-            txtSearchProducts.Font = new Font("Segoe UI", 11F);
-            txtSearchProducts.Location = new Point(16, 38);
-            txtSearchProducts.Name = "txtSearchProducts";
-            txtSearchProducts.PlaceholderText = "  Product Name,SKU or brand...";
-            txtSearchProducts.Size = new Size(312, 37);
-            txtSearchProducts.TabIndex = 1;
-            // 
-            // lblCategoryFilterTitle
-            // 
-            lblCategoryFilterTitle.AutoSize = true;
-            lblCategoryFilterTitle.BackColor = Color.Transparent;
-            lblCategoryFilterTitle.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblCategoryFilterTitle.ForeColor = Color.Black;
-            lblCategoryFilterTitle.Location = new Point(334, 0);
-            lblCategoryFilterTitle.Name = "lblCategoryFilterTitle";
-            lblCategoryFilterTitle.Size = new Size(120, 28);
-            lblCategoryFilterTitle.TabIndex = 2;
-            lblCategoryFilterTitle.Text = " CATEGORY";
-            // 
-            // cmbCategoryFilter
-            // 
-            cmbCategoryFilter.BackColor = Color.White;
-            cmbCategoryFilter.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbCategoryFilter.Font = new Font("Segoe UI", 11F);
-            cmbCategoryFilter.FormattingEnabled = true;
-            cmbCategoryFilter.Location = new Point(334, 38);
-            cmbCategoryFilter.Name = "cmbCategoryFilter";
-            cmbCategoryFilter.Size = new Size(182, 38);
-            cmbCategoryFilter.TabIndex = 3;
-            // 
-            // lblStockStatusFilterTitle
-            // 
-            lblStockStatusFilterTitle.AutoSize = true;
-            lblStockStatusFilterTitle.BackColor = Color.Transparent;
-            lblStockStatusFilterTitle.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblStockStatusFilterTitle.ForeColor = Color.Black;
-            lblStockStatusFilterTitle.Location = new Point(523, 0);
-            lblStockStatusFilterTitle.Name = "lblStockStatusFilterTitle";
-            lblStockStatusFilterTitle.Size = new Size(158, 28);
-            lblStockStatusFilterTitle.TabIndex = 4;
-            lblStockStatusFilterTitle.Text = " STOCK STATUS";
-            // 
-            // cmbStockStatusFilter
-            // 
-            cmbStockStatusFilter.BackColor = Color.White;
-            cmbStockStatusFilter.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbStockStatusFilter.Font = new Font("Segoe UI", 11F);
-            cmbStockStatusFilter.FormattingEnabled = true;
-            cmbStockStatusFilter.Items.AddRange(new object[] { "All Items", "Active", "Low Stock", "Out Of Stock" });
-            cmbStockStatusFilter.Location = new Point(522, 37);
-            cmbStockStatusFilter.Name = "cmbStockStatusFilter";
-            cmbStockStatusFilter.Size = new Size(182, 38);
-            cmbStockStatusFilter.TabIndex = 5;
-            // 
             // btnApplyFilters
             // 
             btnApplyFilters.BackColor = Color.Thistle;
@@ -235,6 +166,76 @@
             btnApplyFilters.TabIndex = 6;
             btnApplyFilters.Text = "Filters";
             btnApplyFilters.UseVisualStyleBackColor = false;
+            // 
+            // cmbStockStatusFilter
+            // 
+            cmbStockStatusFilter.BackColor = Color.White;
+            cmbStockStatusFilter.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbStockStatusFilter.Font = new Font("Segoe UI", 11F);
+            cmbStockStatusFilter.FormattingEnabled = true;
+            cmbStockStatusFilter.Items.AddRange(new object[] { "All Items", "Active", "Low Stock", "Out Of Stock" });
+            cmbStockStatusFilter.Location = new Point(522, 37);
+            cmbStockStatusFilter.Name = "cmbStockStatusFilter";
+            cmbStockStatusFilter.Size = new Size(182, 38);
+            cmbStockStatusFilter.TabIndex = 5;
+            // 
+            // lblStockStatusFilterTitle
+            // 
+            lblStockStatusFilterTitle.AutoSize = true;
+            lblStockStatusFilterTitle.BackColor = Color.Transparent;
+            lblStockStatusFilterTitle.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblStockStatusFilterTitle.ForeColor = Color.Black;
+            lblStockStatusFilterTitle.Location = new Point(523, 0);
+            lblStockStatusFilterTitle.Name = "lblStockStatusFilterTitle";
+            lblStockStatusFilterTitle.Size = new Size(158, 28);
+            lblStockStatusFilterTitle.TabIndex = 4;
+            lblStockStatusFilterTitle.Text = " STOCK STATUS";
+            // 
+            // cmbCategoryFilter
+            // 
+            cmbCategoryFilter.BackColor = Color.White;
+            cmbCategoryFilter.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbCategoryFilter.Font = new Font("Segoe UI", 11F);
+            cmbCategoryFilter.FormattingEnabled = true;
+            cmbCategoryFilter.Location = new Point(334, 38);
+            cmbCategoryFilter.Name = "cmbCategoryFilter";
+            cmbCategoryFilter.Size = new Size(182, 38);
+            cmbCategoryFilter.TabIndex = 3;
+            // 
+            // lblCategoryFilterTitle
+            // 
+            lblCategoryFilterTitle.AutoSize = true;
+            lblCategoryFilterTitle.BackColor = Color.Transparent;
+            lblCategoryFilterTitle.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCategoryFilterTitle.ForeColor = Color.Black;
+            lblCategoryFilterTitle.Location = new Point(334, 0);
+            lblCategoryFilterTitle.Name = "lblCategoryFilterTitle";
+            lblCategoryFilterTitle.Size = new Size(120, 28);
+            lblCategoryFilterTitle.TabIndex = 2;
+            lblCategoryFilterTitle.Text = " CATEGORY";
+            // 
+            // txtSearchProducts
+            // 
+            txtSearchProducts.BackColor = Color.White;
+            txtSearchProducts.BorderStyle = BorderStyle.FixedSingle;
+            txtSearchProducts.Font = new Font("Segoe UI", 11F);
+            txtSearchProducts.Location = new Point(16, 38);
+            txtSearchProducts.Name = "txtSearchProducts";
+            txtSearchProducts.PlaceholderText = "  Product Name,SKU or brand...";
+            txtSearchProducts.Size = new Size(312, 37);
+            txtSearchProducts.TabIndex = 1;
+            // 
+            // lblSearchProductsTitle
+            // 
+            lblSearchProductsTitle.AutoSize = true;
+            lblSearchProductsTitle.BackColor = Color.Transparent;
+            lblSearchProductsTitle.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSearchProductsTitle.ForeColor = Color.Black;
+            lblSearchProductsTitle.Location = new Point(16, 0);
+            lblSearchProductsTitle.Name = "lblSearchProductsTitle";
+            lblSearchProductsTitle.Size = new Size(198, 28);
+            lblSearchProductsTitle.TabIndex = 0;
+            lblSearchProductsTitle.Text = "SEARCH PRODUCTS";
             // 
             // dgvProducts
             // 
@@ -264,17 +265,6 @@
             pnlInventoryValue.Size = new Size(259, 169);
             pnlInventoryValue.TabIndex = 6;
             // 
-            // lblInventoryValueTitle
-            // 
-            lblInventoryValueTitle.AutoSize = true;
-            lblInventoryValueTitle.Font = new Font("Segoe UI", 10F);
-            lblInventoryValueTitle.ForeColor = Color.Black;
-            lblInventoryValueTitle.Location = new Point(3, 27);
-            lblInventoryValueTitle.Name = "lblInventoryValueTitle";
-            lblInventoryValueTitle.Size = new Size(237, 28);
-            lblInventoryValueTitle.TabIndex = 0;
-            lblInventoryValueTitle.Text = "TOTAL INVENTORY VALUE";
-            // 
             // lblInventoryValue
             // 
             lblInventoryValue.AutoSize = true;
@@ -285,6 +275,17 @@
             lblInventoryValue.Size = new Size(102, 54);
             lblInventoryValue.TabIndex = 1;
             lblInventoryValue.Text = "0 Tk";
+            // 
+            // lblInventoryValueTitle
+            // 
+            lblInventoryValueTitle.AutoSize = true;
+            lblInventoryValueTitle.Font = new Font("Segoe UI", 10F);
+            lblInventoryValueTitle.ForeColor = Color.Black;
+            lblInventoryValueTitle.Location = new Point(3, 27);
+            lblInventoryValueTitle.Name = "lblInventoryValueTitle";
+            lblInventoryValueTitle.Size = new Size(237, 28);
+            lblInventoryValueTitle.TabIndex = 0;
+            lblInventoryValueTitle.Text = "TOTAL INVENTORY VALUE";
             // 
             // pnlTopCategory
             // 
@@ -367,12 +368,26 @@
             btnGoBack.Text = "Go Back";
             btnGoBack.UseVisualStyleBackColor = false;
             // 
+            // btnEditProduct
+            // 
+            btnEditProduct.AutoSize = true;
+            btnEditProduct.FlatAppearance.BorderSize = 2;
+            btnEditProduct.FlatStyle = FlatStyle.Flat;
+            btnEditProduct.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnEditProduct.Location = new Point(779, 153);
+            btnEditProduct.Name = "btnEditProduct";
+            btnEditProduct.Size = new Size(105, 46);
+            btnEditProduct.TabIndex = 9;
+            btnEditProduct.Text = "🖉 Edit";
+            btnEditProduct.UseVisualStyleBackColor = true;
+            // 
             // ManageProductsForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Beige;
             ClientSize = new Size(1298, 1170);
+            Controls.Add(btnEditProduct);
             Controls.Add(btnGoBack);
             Controls.Add(pnlStockHealth);
             Controls.Add(pnlTopCategory);
@@ -432,5 +447,6 @@
         private Label lblStockHealth;
         private Label lblStockHealthTitle;
         private Button btnGoBack;
+        private Button btnEditProduct;
     }
 }
