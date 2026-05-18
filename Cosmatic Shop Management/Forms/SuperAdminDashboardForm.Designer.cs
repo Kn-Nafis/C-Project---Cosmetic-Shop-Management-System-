@@ -113,16 +113,16 @@
             // btnLogout
             // 
             btnLogout.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnLogout.BackColor = Color.Coral;
+            btnLogout.BackColor = Color.Firebrick;
             btnLogout.FlatAppearance.BorderSize = 0;
             btnLogout.FlatStyle = FlatStyle.Flat;
             btnLogout.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLogout.ForeColor = Color.White;
-            btnLogout.Location = new Point(685, 650);
+            btnLogout.Location = new Point(770, 25);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(230, 45);
+            btnLogout.Size = new Size(127, 56);
             btnLogout.TabIndex = 11;
-            btnLogout.Text = "Logout";
+            btnLogout.Text = "⎋Logout";
             btnLogout.UseVisualStyleBackColor = false;
             // 
             // btnManageUsers

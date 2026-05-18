@@ -117,8 +117,8 @@ namespace Cosmatic_Shop_Management.Forms
             trkPriceRange.TickFrequency = 100;
             trkPriceRange.Value = 10000;
 
-            lblMinPrice.Text = "$0";
-            lblMaxPrice.Text = "$10000+";
+            lblMinPrice.Text = "0Tk";
+            lblMaxPrice.Text = "10000+Tk";
 
             currentSort = "Newest";
             btnSortNewest.Text = "↕ Sort: Newest";
@@ -333,7 +333,7 @@ namespace Cosmatic_Shop_Management.Forms
             lblPrice.Top = 220;
             lblPrice.Width = 90;
             lblPrice.Height = 25;
-            lblPrice.Text = "$" + price.ToString("0.00");
+            lblPrice.Text = "Tk" + price.ToString("0.00");
             lblPrice.Font = new Font("Segoe UI", 11, FontStyle.Bold);
             lblPrice.ForeColor = Color.FromArgb(75, 0, 130);
             lblPrice.Tag = productId;
@@ -466,7 +466,7 @@ namespace Cosmatic_Shop_Management.Forms
 
         private void trkPriceRange_Scroll(object? sender, EventArgs e)
         {
-            lblMaxPrice.Text = "$" + trkPriceRange.Value + (trkPriceRange.Value >= 500 ? "+" : "");
+            lblMaxPrice.Text = "Tk" + trkPriceRange.Value + (trkPriceRange.Value >= 500 ? "+" : "");
             currentPage = 1;
             ApplyFiltersAndRender();
         }

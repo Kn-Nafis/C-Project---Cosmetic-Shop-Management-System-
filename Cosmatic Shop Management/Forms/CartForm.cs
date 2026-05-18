@@ -129,7 +129,7 @@ namespace Cosmatic_Shop_Management.Forms
 
                 Label lblPrice = new Label();
                 lblPrice.Name = "lblPrice";
-                lblPrice.Text = "$" + Convert.ToDecimal(row["Price"]).ToString("0.00");
+                lblPrice.Text = "Tk" + Convert.ToDecimal(row["Price"]).ToString("0.00");
                 lblPrice.Left = 390;
                 lblPrice.Top = 22;
                 lblPrice.Width = 80;
@@ -148,7 +148,7 @@ namespace Cosmatic_Shop_Management.Forms
 
                 Label lblSubtotal = new Label();
                 lblSubtotal.Name = "lblSubtotal";
-                lblSubtotal.Text = "$" + Convert.ToDecimal(row["Subtotal"]).ToString("0.00");
+                lblSubtotal.Text = "Tk" + Convert.ToDecimal(row["Subtotal"]).ToString("0.00");
                 lblSubtotal.Left = 610;
                 lblSubtotal.Top = 22;
                 lblSubtotal.Width = 100;
@@ -277,11 +277,11 @@ namespace Cosmatic_Shop_Management.Forms
 
             decimal total = subtotal - discount + shipping + tax;
 
-            lblSubtotal.Text = "$" + subtotal.ToString("0.00");
-            lblDiscount.Text = "-$" + discount.ToString("0.00");
-            lblShipping.Text = "$" + shipping.ToString("0.00");
-            lblTax.Text = "$" + tax.ToString("0.00");
-            lblTotalAmount.Text = "$" + total.ToString("0.00");
+            lblSubtotal.Text = "Tk" + subtotal.ToString("0.00");
+            lblDiscount.Text = "-Tk" + discount.ToString("0.00");
+            lblShipping.Text = "Tk" + shipping.ToString("0.00");
+            lblTax.Text = "Tk" + tax.ToString("0.00");
+            lblTotalAmount.Text = "Tk" + total.ToString("0.00");
         }
 
         private void btnRemoveSelected_Click(object? sender, EventArgs e)
@@ -423,6 +423,11 @@ namespace Cosmatic_Shop_Management.Forms
         }
 
         private void btnContinueShopping_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlMain_Paint(object sender, PaintEventArgs e)
         {
 
         }

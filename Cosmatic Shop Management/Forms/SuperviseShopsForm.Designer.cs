@@ -508,7 +508,7 @@
             txtSearchShop.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtSearchShop.Location = new Point(720, 40);
             txtSearchShop.Name = "txtSearchShop";
-            txtSearchShop.PlaceholderText = "Search shop. . . ";
+            txtSearchShop.PlaceholderText = "Search shop. . . .";
             txtSearchShop.Size = new Size(220, 34);
             txtSearchShop.TabIndex = 2;
             // 

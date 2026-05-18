@@ -215,11 +215,11 @@
             // 
             lblOrderTotal.AutoSize = true;
             lblOrderTotal.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblOrderTotal.Location = new Point(570, 495);
+            lblOrderTotal.Location = new Point(579, 498);
             lblOrderTotal.Name = "lblOrderTotal";
-            lblOrderTotal.Size = new Size(150, 32);
+            lblOrderTotal.Size = new Size(157, 32);
             lblOrderTotal.TabIndex = 5;
-            lblOrderTotal.Text = "Order Total:";
+            lblOrderTotal.Text = "Total Order :";
             // 
             // dgvOrderSummary
             // 

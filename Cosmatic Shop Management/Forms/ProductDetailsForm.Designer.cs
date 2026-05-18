@@ -115,20 +115,22 @@
             // lblReviewCount
             // 
             lblReviewCount.AutoSize = true;
+            lblReviewCount.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblReviewCount.ForeColor = Color.FromArgb(74, 20, 140);
             lblReviewCount.Location = new Point(52, 538);
             lblReviewCount.Name = "lblReviewCount";
-            lblReviewCount.Size = new Size(119, 25);
+            lblReviewCount.Size = new Size(129, 25);
             lblReviewCount.TabIndex = 11;
             lblReviewCount.Text = "Review Count";
             // 
             // lblAverageRating
             // 
             lblAverageRating.AutoSize = true;
+            lblAverageRating.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblAverageRating.ForeColor = Color.FromArgb(74, 20, 140);
             lblAverageRating.Location = new Point(580, 538);
             lblAverageRating.Name = "lblAverageRating";
-            lblAverageRating.Size = new Size(133, 25);
+            lblAverageRating.Size = new Size(144, 25);
             lblAverageRating.TabIndex = 10;
             lblAverageRating.Text = "Average Rating";
             // 
@@ -138,6 +140,7 @@
             btnBuyNow.FlatAppearance.BorderColor = Color.FromArgb(74, 20, 140);
             btnBuyNow.FlatAppearance.BorderSize = 3;
             btnBuyNow.FlatStyle = FlatStyle.Popup;
+            btnBuyNow.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnBuyNow.ForeColor = Color.FromArgb(74, 20, 140);
             btnBuyNow.Location = new Point(443, 464);
             btnBuyNow.Margin = new Padding(0);
@@ -151,6 +154,7 @@
             // 
             btnAddToCart.BackColor = Color.Coral;
             btnAddToCart.FlatStyle = FlatStyle.Flat;
+            btnAddToCart.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAddToCart.ForeColor = Color.FromArgb(74, 20, 140);
             btnAddToCart.Location = new Point(270, 464);
             btnAddToCart.Margin = new Padding(0);
@@ -173,10 +177,11 @@
             // lblDescription
             // 
             lblDescription.AutoSize = true;
+            lblDescription.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDescription.ForeColor = Color.FromArgb(74, 20, 140);
-            lblDescription.Location = new Point(52, 289);
+            lblDescription.Location = new Point(52, 286);
             lblDescription.Name = "lblDescription";
-            lblDescription.Size = new Size(102, 25);
+            lblDescription.Size = new Size(109, 25);
             lblDescription.TabIndex = 6;
             lblDescription.Text = "Description";
             // 

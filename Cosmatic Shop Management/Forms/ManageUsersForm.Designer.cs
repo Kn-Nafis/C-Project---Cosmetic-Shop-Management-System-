@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManageUsersForm));
             pnlTopHeader = new Panel();
+            btnBack = new Button();
             txtSearchUsers = new TextBox();
             lblPageTitle = new Label();
             lblBrand = new Label();
@@ -62,7 +63,6 @@
             lblTotalStaffValue = new Label();
             lblTotalStaffTitle = new Label();
             btnFloatingAdd = new Button();
-            btnBack = new Button();
             pnlTopHeader.SuspendLayout();
             pnlFilters.SuspendLayout();
             pnlUsersTable.SuspendLayout();
@@ -84,6 +84,21 @@
             pnlTopHeader.Name = "pnlTopHeader";
             pnlTopHeader.Size = new Size(1378, 70);
             pnlTopHeader.TabIndex = 0;
+            // 
+            // btnBack
+            // 
+            btnBack.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnBack.BackColor = Color.FromArgb(248, 221, 232);
+            btnBack.FlatAppearance.BorderSize = 0;
+            btnBack.FlatStyle = FlatStyle.Flat;
+            btnBack.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnBack.ForeColor = Color.Crimson;
+            btnBack.Location = new Point(1268, 11);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(88, 48);
+            btnBack.TabIndex = 52;
+            btnBack.Text = "← Back";
+            btnBack.UseVisualStyleBackColor = false;
             // 
             // txtSearchUsers
             // 
@@ -483,9 +498,9 @@
             lblTotalStaffTitle.ForeColor = Color.DimGray;
             lblTotalStaffTitle.Location = new Point(50, 12);
             lblTotalStaffTitle.Name = "lblTotalStaffTitle";
-            lblTotalStaffTitle.Size = new Size(127, 21);
+            lblTotalStaffTitle.Size = new Size(123, 21);
             lblTotalStaffTitle.TabIndex = 0;
-            lblTotalStaffTitle.Text = "👥TOTAL STAFF";
+            lblTotalStaffTitle.Text = "👥TOTAL USER";
             // 
             // btnFloatingAdd
             // 
@@ -502,21 +517,6 @@
             btnFloatingAdd.TabIndex = 51;
             btnFloatingAdd.UseVisualStyleBackColor = false;
             btnFloatingAdd.Click += btnFloatingAdd_Click_1;
-            // 
-            // btnBack
-            // 
-            btnBack.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnBack.BackColor = Color.FromArgb(248, 221, 232);
-            btnBack.FlatAppearance.BorderSize = 0;
-            btnBack.FlatStyle = FlatStyle.Flat;
-            btnBack.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnBack.ForeColor = Color.Crimson;
-            btnBack.Location = new Point(1268, 11);
-            btnBack.Name = "btnBack";
-            btnBack.Size = new Size(88, 48);
-            btnBack.TabIndex = 52;
-            btnBack.Text = "← Back";
-            btnBack.UseVisualStyleBackColor = false;
             // 
             // ManageUsersForm
             // 

@@ -79,6 +79,7 @@
             pnlMain.Padding = new Padding(30, 25, 30, 25);
             pnlMain.Size = new Size(1179, 769);
             pnlMain.TabIndex = 1;
+            pnlMain.Paint += pnlMain_Paint;
             // 
             // pnlTableHeader
             // 
@@ -201,9 +202,9 @@
             lblTotalAmount.ForeColor = Color.Indigo;
             lblTotalAmount.Location = new Point(150, 285);
             lblTotalAmount.Name = "lblTotalAmount";
-            lblTotalAmount.Size = new Size(83, 38);
+            lblTotalAmount.Size = new Size(105, 38);
             lblTotalAmount.TabIndex = 11;
-            lblTotalAmount.Text = "$0.00";
+            lblTotalAmount.Text = "0.00 Tk";
             lblTotalAmount.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lblTotalText
@@ -230,9 +231,9 @@
             lblTax.AutoSize = true;
             lblTax.Location = new Point(190, 210);
             lblTax.Name = "lblTax";
-            lblTax.Size = new Size(56, 25);
+            lblTax.Size = new Size(64, 25);
             lblTax.TabIndex = 8;
-            lblTax.Text = "$0.00";
+            lblTax.Text = "0.00Tk";
             lblTax.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lblTaxText
@@ -249,9 +250,9 @@
             lblShipping.AutoSize = true;
             lblShipping.Location = new Point(190, 170);
             lblShipping.Name = "lblShipping";
-            lblShipping.Size = new Size(56, 25);
+            lblShipping.Size = new Size(64, 25);
             lblShipping.TabIndex = 6;
-            lblShipping.Text = "$0.00";
+            lblShipping.Text = "0.00Tk";
             lblShipping.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lblShippingText
@@ -269,9 +270,9 @@
             lblDiscount.ForeColor = Color.Green;
             lblDiscount.Location = new Point(190, 130);
             lblDiscount.Name = "lblDiscount";
-            lblDiscount.Size = new Size(63, 25);
+            lblDiscount.Size = new Size(71, 25);
             lblDiscount.TabIndex = 4;
-            lblDiscount.Text = "-$0.00";
+            lblDiscount.Text = "-0.00Tk";
             lblDiscount.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lblDiscountText
@@ -290,9 +291,9 @@
             lblSubtotal.ForeColor = Color.Black;
             lblSubtotal.Location = new Point(190, 90);
             lblSubtotal.Name = "lblSubtotal";
-            lblSubtotal.Size = new Size(60, 28);
+            lblSubtotal.Size = new Size(69, 28);
             lblSubtotal.TabIndex = 2;
-            lblSubtotal.Text = "$0.00";
+            lblSubtotal.Text = "0.00Tk";
             lblSubtotal.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lblSubtotalText

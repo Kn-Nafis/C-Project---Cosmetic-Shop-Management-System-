@@ -359,7 +359,7 @@
             // 
             // flpFemaleProducts
             // 
-            flpFemaleProducts.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            flpFemaleProducts.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             flpFemaleProducts.AutoScroll = true;
             flpFemaleProducts.Location = new Point(305, 170);
             flpFemaleProducts.Name = "flpFemaleProducts";
