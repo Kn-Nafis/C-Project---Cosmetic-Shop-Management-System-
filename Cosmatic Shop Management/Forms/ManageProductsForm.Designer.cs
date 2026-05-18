@@ -64,6 +64,7 @@
             // 
             // pnlLowStockAlert
             // 
+            pnlLowStockAlert.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlLowStockAlert.BackColor = Color.MistyRose;
             pnlLowStockAlert.BorderStyle = BorderStyle.FixedSingle;
             pnlLowStockAlert.Controls.Add(lnkViewDetails);
@@ -123,6 +124,7 @@
             // 
             // btnAddProduct
             // 
+            btnAddProduct.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnAddProduct.BackColor = Color.Coral;
             btnAddProduct.Cursor = Cursors.Hand;
             btnAddProduct.FlatAppearance.BorderSize = 0;
@@ -138,6 +140,7 @@
             // 
             // pnlFilters
             // 
+            pnlFilters.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlFilters.BackColor = Color.Cornsilk;
             pnlFilters.BorderStyle = BorderStyle.FixedSingle;
             pnlFilters.Controls.Add(btnApplyFilters);
@@ -241,6 +244,7 @@
             // 
             dgvProducts.AllowUserToAddRows = false;
             dgvProducts.AllowUserToDeleteRows = false;
+            dgvProducts.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dgvProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvProducts.BackgroundColor = Color.Cornsilk;
             dgvProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -262,7 +266,7 @@
             pnlInventoryValue.Controls.Add(lblInventoryValueTitle);
             pnlInventoryValue.Location = new Point(202, 750);
             pnlInventoryValue.Name = "pnlInventoryValue";
-            pnlInventoryValue.Size = new Size(259, 169);
+            pnlInventoryValue.Size = new Size(305, 169);
             pnlInventoryValue.TabIndex = 6;
             // 
             // lblInventoryValue
@@ -293,9 +297,9 @@
             pnlTopCategory.BorderStyle = BorderStyle.FixedSingle;
             pnlTopCategory.Controls.Add(lblTopSellingCategory);
             pnlTopCategory.Controls.Add(lblTopCategoryTitle);
-            pnlTopCategory.Location = new Point(481, 750);
+            pnlTopCategory.Location = new Point(513, 750);
             pnlTopCategory.Name = "pnlTopCategory";
-            pnlTopCategory.Size = new Size(325, 169);
+            pnlTopCategory.Size = new Size(307, 169);
             pnlTopCategory.TabIndex = 7;
             // 
             // lblTopSellingCategory
@@ -355,6 +359,7 @@
             // 
             // btnGoBack
             // 
+            btnGoBack.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnGoBack.BackColor = Color.FromArgb(74, 20, 140);
             btnGoBack.Cursor = Cursors.Hand;
             btnGoBack.FlatAppearance.BorderSize = 0;
@@ -370,6 +375,7 @@
             // 
             // btnEditProduct
             // 
+            btnEditProduct.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnEditProduct.AutoSize = true;
             btnEditProduct.FlatAppearance.BorderSize = 2;
             btnEditProduct.FlatStyle = FlatStyle.Flat;

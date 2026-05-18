@@ -195,9 +195,9 @@
             lblMaxPrice.ForeColor = Color.Gray;
             lblMaxPrice.Location = new Point(205, 530);
             lblMaxPrice.Name = "lblMaxPrice";
-            lblMaxPrice.Size = new Size(64, 25);
+            lblMaxPrice.Size = new Size(81, 25);
             lblMaxPrice.TabIndex = 13;
-            lblMaxPrice.Text = "$500+";
+            lblMaxPrice.Text = "TK10000";
             // 
             // lblMinPrice
             // 
@@ -206,9 +206,9 @@
             lblMinPrice.ForeColor = Color.Gray;
             lblMinPrice.Location = new Point(20, 530);
             lblMinPrice.Name = "lblMinPrice";
-            lblMinPrice.Size = new Size(32, 25);
+            lblMinPrice.Size = new Size(41, 25);
             lblMinPrice.TabIndex = 12;
-            lblMinPrice.Text = "$0";
+            lblMinPrice.Text = "TK0";
             // 
             // trkPriceRange
             // 
@@ -219,7 +219,7 @@
             trkPriceRange.Size = new Size(230, 69);
             trkPriceRange.TabIndex = 11;
             trkPriceRange.TickFrequency = 50;
-            trkPriceRange.Value = 250;
+            trkPriceRange.Value = 10000;
             // 
             // lblPriceRangeTitle
             // 
@@ -359,6 +359,7 @@
             // 
             // flpFemaleProducts
             // 
+            flpFemaleProducts.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             flpFemaleProducts.AutoScroll = true;
             flpFemaleProducts.Location = new Point(305, 170);
             flpFemaleProducts.Name = "flpFemaleProducts";

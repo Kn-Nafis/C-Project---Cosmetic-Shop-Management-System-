@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using Microsoft.Data.SqlClient;
 using Cosmatic_Shop_Management.DAL;
 using Cosmatic_Shop_Management.Helpers;
 
@@ -8,6 +9,8 @@ namespace Cosmatic_Shop_Management.Forms
 {
     public partial class AdminDashboardForm : Form
     {
+        private int myShopId = 0;
+
         public AdminDashboardForm()
         {
             InitializeComponent();
@@ -36,25 +39,127 @@ namespace Cosmatic_Shop_Management.Forms
         private void AdminDashboardForm_Load(object sender, EventArgs e)
         {
             lblAdminName.Text = "Welcome, " + SessionManager.FullName;
+
+            myShopId = GetMyShopId();
+
+            if (myShopId <= 0)
+            {
+                MessageBox.Show("No shop found for this admin.");
+                lblTotalProducts.Text = "0";
+                lblTotalOrders.Text = "0";
+                lblGrossSales.Text = "0.00 Tk";
+                lblNetIncome.Text = "0.00 Tk";
+                lblLowStock.Text = "0";
+                dgvRecentOrders.DataSource = null;
+                return;
+            }
+
             LoadDashboardStats();
             LoadRecentOrders();
+        }
+
+        private int GetMyShopId()
+        {
+            try
+            {
+                string query = @"
+                    SELECT TOP 1 ShopId
+                    FROM Shops
+                    WHERE OwnerUserId = @OwnerUserId
+                    ORDER BY ShopId DESC
+                ";
+
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OwnerUserId", SessionManager.UserId)
+                };
+
+                object result = DatabaseHelper.ExecuteScalar(query, parameters);
+
+                if (result == null || result == DBNull.Value)
+                    return 0;
+
+                return Convert.ToInt32(result);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Shop load error: " + ex.Message);
+                return 0;
+            }
         }
 
         private void LoadDashboardStats()
         {
             try
             {
-                string totalProductsQuery = "SELECT COUNT(*) FROM Products WHERE IsActive = 1";
-                string totalOrdersQuery = "SELECT COUNT(*) FROM Orders";
-                string grossSalesQuery = "SELECT ISNULL(SUM(TotalAmount), 0) FROM Orders";
-                string netIncomeQuery = "SELECT ISNULL(SUM(ShopIncome), 0) FROM OrderItems";
-                string lowStockQuery = "SELECT COUNT(*) FROM Products WHERE StockQty < 10 AND IsActive = 1";
+                string totalProductsQuery = @"
+                    SELECT COUNT(*)
+                    FROM Products
+                    WHERE IsActive = 1
+                      AND ShopId = @ShopId
+                ";
 
-                object totalProducts = DatabaseHelper.ExecuteScalar(totalProductsQuery);
-                object totalOrders = DatabaseHelper.ExecuteScalar(totalOrdersQuery);
-                object grossSales = DatabaseHelper.ExecuteScalar(grossSalesQuery);
-                object netIncome = DatabaseHelper.ExecuteScalar(netIncomeQuery);
-                object lowStock = DatabaseHelper.ExecuteScalar(lowStockQuery);
+                string totalOrdersQuery = @"
+                    SELECT COUNT(DISTINCT O.OrderId)
+                    FROM Orders O
+                    INNER JOIN OrderItems OI ON O.OrderId = OI.OrderId
+                    WHERE OI.ShopId = @ShopId
+                ";
+
+                string grossSalesQuery = @"
+                    SELECT ISNULL(SUM(OI.LineTotal), 0)
+                    FROM OrderItems OI
+                    INNER JOIN Orders O ON OI.OrderId = O.OrderId
+                    WHERE OI.ShopId = @ShopId
+                      AND O.OrderStatus <> 'Cancelled'
+                ";
+
+                string netIncomeQuery = @"
+                    SELECT ISNULL(SUM(OI.ShopIncome), 0)
+                    FROM OrderItems OI
+                    INNER JOIN Orders O ON OI.OrderId = O.OrderId
+                    WHERE OI.ShopId = @ShopId
+                      AND O.OrderStatus <> 'Cancelled'
+                ";
+
+                string lowStockQuery = @"
+                    SELECT COUNT(*)
+                    FROM Products
+                    WHERE StockQty < 10
+                      AND IsActive = 1
+                      AND ShopId = @ShopId
+                ";
+
+                SqlParameter[] parameters1 =
+                {
+                    new SqlParameter("@ShopId", myShopId)
+                };
+
+                SqlParameter[] parameters2 =
+                {
+                    new SqlParameter("@ShopId", myShopId)
+                };
+
+                SqlParameter[] parameters3 =
+                {
+                    new SqlParameter("@ShopId", myShopId)
+                };
+
+                SqlParameter[] parameters4 =
+                {
+                    new SqlParameter("@ShopId", myShopId)
+                };
+
+                SqlParameter[] parameters5 =
+                {
+                    new SqlParameter("@ShopId", myShopId)
+                };
+
+                object totalProducts = DatabaseHelper.ExecuteScalar(totalProductsQuery, parameters1);
+                object totalOrders = DatabaseHelper.ExecuteScalar(totalOrdersQuery, parameters2);
+                object grossSales = DatabaseHelper.ExecuteScalar(grossSalesQuery, parameters3);
+                object netIncome = DatabaseHelper.ExecuteScalar(netIncomeQuery, parameters4);
+                object lowStock = DatabaseHelper.ExecuteScalar(lowStockQuery, parameters5);
 
                 lblTotalProducts.Text = Convert.ToString(totalProducts);
                 lblTotalOrders.Text = Convert.ToString(totalOrders);
@@ -77,13 +182,20 @@ namespace Cosmatic_Shop_Management.Forms
                         O.OrderId AS [Order ID],
                         U.FullName AS [Customer],
                         O.OrderStatus AS [Status],
-                        O.TotalAmount AS [Amount]
+                        OI.LineTotal AS [Amount]
                     FROM Orders O
                     INNER JOIN Users U ON O.CustomerUserId = U.UserId
+                    INNER JOIN OrderItems OI ON O.OrderId = OI.OrderId
+                    WHERE OI.ShopId = @ShopId
                     ORDER BY O.OrderId DESC
                 ";
 
-                DataTable dt = DatabaseHelper.GetDataTable(query);
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@ShopId", myShopId)
+                };
+
+                DataTable dt = DatabaseHelper.GetDataTable(query, parameters);
                 dgvRecentOrders.DataSource = dt;
             }
             catch (Exception ex)
@@ -95,31 +207,41 @@ namespace Cosmatic_Shop_Management.Forms
         private void btnManageShop_Click(object sender, EventArgs e)
         {
             ManageShopForm form = new ManageShopForm();
-            form.Show();
+            form.ShowDialog();
+
+            myShopId = GetMyShopId();
+            LoadDashboardStats();
+            LoadRecentOrders();
         }
 
         private void btnManageProducts_Click(object sender, EventArgs e)
         {
             ManageProductsForm form = new ManageProductsForm();
-            form.Show();
+            form.ShowDialog();
+
+            LoadDashboardStats();
+            LoadRecentOrders();
         }
 
         private void btnOrders_Click(object sender, EventArgs e)
         {
             AdminOrdersForm form = new AdminOrdersForm();
-            form.Show();
+            form.ShowDialog();
+
+            LoadDashboardStats();
+            LoadRecentOrders();
         }
 
         private void btnReports_Click(object sender, EventArgs e)
         {
             AnalyticsForm form = new AnalyticsForm();
-            form.Show();
+            form.ShowDialog();
         }
 
         private void btnEmployees_Click(object sender, EventArgs e)
         {
             ManageUsersForm form = new ManageUsersForm();
-            form.Show();
+            form.ShowDialog();
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

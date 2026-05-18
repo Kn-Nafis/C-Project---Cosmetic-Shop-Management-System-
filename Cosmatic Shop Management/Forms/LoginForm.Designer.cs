@@ -46,7 +46,7 @@
             // 
             // pnlLoginBox
             // 
-            pnlLoginBox.Anchor = AnchorStyles.None;
+            pnlLoginBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             pnlLoginBox.AutoSize = true;
             pnlLoginBox.BackColor = Color.FromArgb(251, 244, 247);
             pnlLoginBox.Controls.Add(picLogo);
@@ -59,16 +59,16 @@
             pnlLoginBox.Controls.Add(lblEmail);
             pnlLoginBox.Controls.Add(lblSubtitle);
             pnlLoginBox.Controls.Add(lblTitle);
-            pnlLoginBox.Location = new Point(215, 90);
+            pnlLoginBox.Location = new Point(63, 90);
             pnlLoginBox.Name = "pnlLoginBox";
-            pnlLoginBox.Size = new Size(443, 759);
+            pnlLoginBox.Size = new Size(763, 759);
             pnlLoginBox.TabIndex = 0;
             // 
             // picLogo
             // 
             picLogo.BackColor = Color.Transparent;
             picLogo.Image = (Image)resources.GetObject("picLogo.Image");
-            picLogo.Location = new Point(146, 77);
+            picLogo.Location = new Point(311, 75);
             picLogo.Name = "picLogo";
             picLogo.Size = new Size(126, 90);
             picLogo.SizeMode = PictureBoxSizeMode.Zoom;
@@ -81,7 +81,7 @@
             lnkCreateAccount.AutoSize = true;
             lnkCreateAccount.Cursor = Cursors.Hand;
             lnkCreateAccount.LinkColor = Color.FromArgb(74, 20, 140);
-            lnkCreateAccount.Location = new Point(265, 593);
+            lnkCreateAccount.Location = new Point(406, 566);
             lnkCreateAccount.Name = "lnkCreateAccount";
             lnkCreateAccount.Size = new Size(117, 25);
             lnkCreateAccount.TabIndex = 8;
@@ -91,7 +91,7 @@
             // lblNoAccount
             // 
             lblNoAccount.AutoSize = true;
-            lblNoAccount.Location = new Point(58, 593);
+            lblNoAccount.Location = new Point(200, 566);
             lblNoAccount.Name = "lblNoAccount";
             lblNoAccount.Size = new Size(200, 25);
             lblNoAccount.TabIndex = 7;
@@ -102,9 +102,9 @@
             btnLogin.BackColor = Color.Coral;
             btnLogin.FlatAppearance.BorderSize = 0;
             btnLogin.FlatStyle = FlatStyle.Flat;
-            btnLogin.Location = new Point(34, 547);
+            btnLogin.Location = new Point(135, 509);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(378, 43);
+            btnLogin.Size = new Size(504, 43);
             btnLogin.TabIndex = 6;
             btnLogin.Text = "Login To Console";
             btnLogin.UseVisualStyleBackColor = false;
@@ -112,10 +112,10 @@
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(34, 469);
+            txtPassword.Location = new Point(135, 443);
             txtPassword.Name = "txtPassword";
-            txtPassword.PlaceholderText = "Enter your password";
-            txtPassword.Size = new Size(378, 31);
+            txtPassword.PlaceholderText = " Enter your password";
+            txtPassword.Size = new Size(504, 31);
             txtPassword.TabIndex = 5;
             txtPassword.Tag = "*";
             txtPassword.UseSystemPasswordChar = true;
@@ -123,17 +123,17 @@
             // txtEmail
             // 
             txtEmail.Font = new Font("Cascadia Code Light", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtEmail.Location = new Point(34, 360);
+            txtEmail.Location = new Point(135, 349);
             txtEmail.Name = "txtEmail";
-            txtEmail.PlaceholderText = "Enter your Email";
-            txtEmail.Size = new Size(378, 28);
+            txtEmail.PlaceholderText = " Enter your Email";
+            txtEmail.Size = new Size(504, 28);
             txtEmail.TabIndex = 4;
             // 
             // lblPassward
             // 
             lblPassward.AutoSize = true;
             lblPassward.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblPassward.Location = new Point(34, 429);
+            lblPassward.Location = new Point(135, 400);
             lblPassward.Name = "lblPassward";
             lblPassward.Size = new Size(92, 25);
             lblPassward.TabIndex = 3;
@@ -143,7 +143,7 @@
             // 
             lblEmail.AutoSize = true;
             lblEmail.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEmail.Location = new Point(34, 311);
+            lblEmail.Location = new Point(135, 311);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(58, 25);
             lblEmail.TabIndex = 2;
@@ -153,7 +153,7 @@
             // 
             lblSubtitle.AutoSize = true;
             lblSubtitle.Font = new Font("Segoe UI Variable Display", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblSubtitle.Location = new Point(104, 246);
+            lblSubtitle.Location = new Point(265, 225);
             lblSubtitle.Name = "lblSubtitle";
             lblSubtitle.Size = new Size(220, 24);
             lblSubtitle.TabIndex = 1;
@@ -164,7 +164,7 @@
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Vivaldi", 24F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             lblTitle.ForeColor = Color.FromArgb(74, 20, 140);
-            lblTitle.Location = new Point(34, 177);
+            lblTitle.Location = new Point(178, 168);
             lblTitle.Margin = new Padding(0);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(383, 57);
@@ -181,6 +181,7 @@
             Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "LoginForm";
+            WindowState = FormWindowState.Maximized;
             pnlLoginBox.ResumeLayout(false);
             pnlLoginBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();

@@ -72,32 +72,57 @@ namespace Cosmatic_Shop_Management.Forms
 
         private void btnBrowseImage_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
-            ofd.Title = "Select Product Image";
-
-            if (ofd.ShowDialog() == DialogResult.OK)
+            try
             {
-                try
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+                ofd.Title = "Select Product Image";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     selectedImagePath = ofd.FileName;
+                    LoadPreviewImage(selectedImagePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid image file.\n\n" + ex.Message, "Image Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                    using (FileStream fs = new FileStream(selectedImagePath, FileMode.Open, FileAccess.Read))
+                selectedImagePath = "";
+                picProductPreview.Image = null;
+            }
+        }
+
+        private void LoadPreviewImage(string imagePath)
+        {
+            try
+            {
+                if (picProductPreview.Image != null)
+                {
+                    picProductPreview.Image.Dispose();
+                    picProductPreview.Image = null;
+                }
+
+                if (!string.IsNullOrWhiteSpace(imagePath) && File.Exists(imagePath))
+                {
+                    byte[] bytes = File.ReadAllBytes(imagePath);
+                    using (MemoryStream ms = new MemoryStream(bytes))
+                    using (Image temp = Image.FromStream(ms))
                     {
-                        Image img = Image.FromStream(fs);
-                        picProductPreview.Image = new Bitmap(img);
+                        picProductPreview.Image = new Bitmap(temp);
                     }
 
                     picProductPreview.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show("Invalid image file.\n\n" + ex.Message, "Image Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    selectedImagePath = "";
                     picProductPreview.Image = null;
                 }
+            }
+            catch
+            {
+                picProductPreview.Image = null;
             }
         }
 
@@ -116,7 +141,13 @@ namespace Cosmatic_Shop_Management.Forms
             txtDescription.Clear();
             rdoActive.Checked = true;
             rdoDiscontinued.Checked = false;
-            picProductPreview.Image = null;
+
+            if (picProductPreview.Image != null)
+            {
+                picProductPreview.Image.Dispose();
+                picProductPreview.Image = null;
+            }
+
             selectedImagePath = "";
         }
 
@@ -159,18 +190,31 @@ namespace Cosmatic_Shop_Management.Forms
 
             try
             {
-                string checkNameQuery = "SELECT COUNT(*) FROM Products WHERE ProductName = @ProductName";
+                int shopId = GetCurrentShopId();
+                if (shopId == 0)
+                {
+                    MessageBox.Show("No shop found for current admin. Please create shop first.");
+                    return;
+                }
+
+                string checkNameQuery = @"
+                    SELECT COUNT(*)
+                    FROM Products
+                    WHERE ProductName = @ProductName
+                      AND ShopId = @ShopId
+                ";
 
                 SqlParameter[] checkParams =
                 {
-                    new SqlParameter("@ProductName", txtProductName.Text.Trim())
+                    new SqlParameter("@ProductName", txtProductName.Text.Trim()),
+                    new SqlParameter("@ShopId", shopId)
                 };
 
                 int nameExists = Convert.ToInt32(DatabaseHelper.ExecuteScalar(checkNameQuery, checkParams));
 
                 if (nameExists > 0)
                 {
-                    MessageBox.Show("Product name already exists. Please use a unique name.");
+                    MessageBox.Show("This product name already exists in your shop. Please use a unique name.");
                     txtProductName.Focus();
                     return;
                 }
@@ -191,14 +235,6 @@ namespace Cosmatic_Shop_Management.Forms
                 }
 
                 int categoryId = Convert.ToInt32(categoryIdObj);
-
-                int shopId = GetCurrentShopId();
-                if (shopId == 0)
-                {
-                    MessageBox.Show("No shop found for current admin. Please create shop first.");
-                    return;
-                }
-
                 bool isActive = rdoActive.Checked;
 
                 string insertQuery = @"
@@ -243,7 +279,7 @@ namespace Cosmatic_Shop_Management.Forms
                     new SqlParameter("@Price", price),
                     new SqlParameter("@StockQty", stockQty),
                     new SqlParameter("@GenderSection", cmbGender.Text),
-                    new SqlParameter("@ImagePath", selectedImagePath),
+                    new SqlParameter("@ImagePath", string.IsNullOrWhiteSpace(selectedImagePath) ? (object)DBNull.Value : selectedImagePath),
                     new SqlParameter("@IsActive", isActive)
                 };
 

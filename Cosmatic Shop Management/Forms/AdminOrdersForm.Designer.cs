@@ -292,7 +292,7 @@
             lblTotalPayableValue.Name = "lblTotalPayableValue";
             lblTotalPayableValue.Size = new Size(89, 38);
             lblTotalPayableValue.TabIndex = 9;
-            lblTotalPayableValue.Text = "96.66";
+            lblTotalPayableValue.Text = "00.00";
             // 
             // lblTotalPayableTitle
             // 
@@ -325,7 +325,7 @@
             lblTaxValue.Name = "lblTaxValue";
             lblTaxValue.Size = new Size(58, 30);
             lblTaxValue.TabIndex = 9;
-            lblTaxValue.Text = "7.16";
+            lblTaxValue.Text = "0.00";
             // 
             // lblTaxTitle
             // 
@@ -391,7 +391,7 @@
             lblSubtotalValue.Name = "lblSubtotalValue";
             lblSubtotalValue.Size = new Size(71, 30);
             lblSubtotalValue.TabIndex = 9;
-            lblSubtotalValue.Text = "89.50\n";
+            lblSubtotalValue.Text = "00.00\n";
             // 
             // lblSubtotalTitle
             // 
@@ -429,9 +429,9 @@
             lblShippingAddress.ForeColor = Color.Black;
             lblShippingAddress.Location = new Point(250, 120);
             lblShippingAddress.Name = "lblShippingAddress";
-            lblShippingAddress.Size = new Size(142, 28);
+            lblShippingAddress.Size = new Size(84, 28);
             lblShippingAddress.TabIndex = 7;
-            lblShippingAddress.Text = "2104 Maple St.";
+            lblShippingAddress.Text = "---------";
             // 
             // lblShippingTitle
             // 
@@ -452,9 +452,9 @@
             lblCustomerName.ForeColor = Color.Black;
             lblCustomerName.Location = new Point(15, 120);
             lblCustomerName.Name = "lblCustomerName";
-            lblCustomerName.Size = new Size(144, 28);
+            lblCustomerName.Size = new Size(84, 28);
             lblCustomerName.TabIndex = 5;
-            lblCustomerName.Text = "Bonnie Bennett";
+            lblCustomerName.Text = "---------";
             // 
             // lblCustomerTitle
             // 
@@ -476,28 +476,28 @@
             lblProductPrice.Name = "lblProductPrice";
             lblProductPrice.Size = new Size(66, 30);
             lblProductPrice.TabIndex = 3;
-            lblProductPrice.Text = "89.50";
+            lblProductPrice.Text = "00.00";
             // 
             // lblProductName
             // 
             lblProductName.AutoSize = true;
             lblProductName.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblProductName.ForeColor = Color.FromArgb(74, 20, 140);
-            lblProductName.Location = new Point(105, 35);
+            lblProductName.Location = new Point(105, 27);
             lblProductName.Name = "lblProductName";
-            lblProductName.Size = new Size(313, 38);
+            lblProductName.Size = new Size(160, 38);
             lblProductName.TabIndex = 2;
-            lblProductName.Text = "Midnight Glow Palette";
+            lblProductName.Text = "***********";
             // 
             // lblOrderNo
             // 
             lblOrderNo.AutoSize = true;
             lblOrderNo.ForeColor = Color.Gray;
-            lblOrderNo.Location = new Point(105, 15);
+            lblOrderNo.Location = new Point(105, 0);
             lblOrderNo.Name = "lblOrderNo";
-            lblOrderNo.Size = new Size(136, 25);
+            lblOrderNo.Size = new Size(126, 25);
             lblOrderNo.TabIndex = 1;
-            lblOrderNo.Text = "ORDER #77822";
+            lblOrderNo.Text = "ORDER #0000";
             // 
             // picOrderProduct
             // 
@@ -548,6 +548,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AdminOrdersForm";
             WindowState = FormWindowState.Maximized;
+            Load += AdminOrdersForm_Load_1;
             pnlTopHeader.ResumeLayout(false);
             pnlTopHeader.PerformLayout();
             pnlOrdersList.ResumeLayout(false);

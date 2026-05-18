@@ -62,6 +62,7 @@
             lblTotalStaffValue = new Label();
             lblTotalStaffTitle = new Label();
             btnFloatingAdd = new Button();
+            btnBack = new Button();
             pnlTopHeader.SuspendLayout();
             pnlFilters.SuspendLayout();
             pnlUsersTable.SuspendLayout();
@@ -74,6 +75,7 @@
             // pnlTopHeader
             // 
             pnlTopHeader.BorderStyle = BorderStyle.FixedSingle;
+            pnlTopHeader.Controls.Add(btnBack);
             pnlTopHeader.Controls.Add(txtSearchUsers);
             pnlTopHeader.Controls.Add(lblPageTitle);
             pnlTopHeader.Controls.Add(lblBrand);
@@ -404,9 +406,9 @@
             lblPendingApprovalsValue.ForeColor = Color.FromArgb(74, 20, 140);
             lblPendingApprovalsValue.Location = new Point(100, 33);
             lblPendingApprovalsValue.Name = "lblPendingApprovalsValue";
-            lblPendingApprovalsValue.Size = new Size(46, 54);
+            lblPendingApprovalsValue.Size = new Size(69, 54);
             lblPendingApprovalsValue.TabIndex = 1;
-            lblPendingApprovalsValue.Text = "6";
+            lblPendingApprovalsValue.Text = "00";
             // 
             // lblPendingApprovalsTitle
             // 
@@ -439,7 +441,7 @@
             lblActiveUsersValue.Name = "lblActiveUsersValue";
             lblActiveUsersValue.Size = new Size(83, 48);
             lblActiveUsersValue.TabIndex = 1;
-            lblActiveUsersValue.Text = "118";
+            lblActiveUsersValue.Text = "000";
             // 
             // lblActiveUsersTitle
             // 
@@ -472,7 +474,7 @@
             lblTotalStaffValue.Name = "lblTotalStaffValue";
             lblTotalStaffValue.Size = new Size(83, 48);
             lblTotalStaffValue.TabIndex = 1;
-            lblTotalStaffValue.Text = "124";
+            lblTotalStaffValue.Text = "000";
             // 
             // lblTotalStaffTitle
             // 
@@ -487,7 +489,6 @@
             // 
             // btnFloatingAdd
             // 
-            btnFloatingAdd.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnFloatingAdd.BackColor = Color.Transparent;
             btnFloatingAdd.Cursor = Cursors.Hand;
             btnFloatingAdd.FlatAppearance.BorderSize = 0;
@@ -495,11 +496,27 @@
             btnFloatingAdd.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnFloatingAdd.ForeColor = Color.White;
             btnFloatingAdd.Image = (Image)resources.GetObject("btnFloatingAdd.Image");
-            btnFloatingAdd.Location = new Point(1183, 651);
+            btnFloatingAdd.Location = new Point(816, 669);
             btnFloatingAdd.Name = "btnFloatingAdd";
-            btnFloatingAdd.Size = new Size(99, 110);
+            btnFloatingAdd.Size = new Size(99, 95);
             btnFloatingAdd.TabIndex = 51;
             btnFloatingAdd.UseVisualStyleBackColor = false;
+            btnFloatingAdd.Click += btnFloatingAdd_Click_1;
+            // 
+            // btnBack
+            // 
+            btnBack.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnBack.BackColor = Color.FromArgb(248, 221, 232);
+            btnBack.FlatAppearance.BorderSize = 0;
+            btnBack.FlatStyle = FlatStyle.Flat;
+            btnBack.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnBack.ForeColor = Color.Crimson;
+            btnBack.Location = new Point(1268, 11);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(88, 48);
+            btnBack.TabIndex = 52;
+            btnBack.Text = "← Back";
+            btnBack.UseVisualStyleBackColor = false;
             // 
             // ManageUsersForm
             // 
@@ -571,5 +588,6 @@
         private Label lblTotalStaffTitle;
         private Button btnFloatingAdd;
         private Label lblUserCount;
+        private Button btnBack;
     }
 }

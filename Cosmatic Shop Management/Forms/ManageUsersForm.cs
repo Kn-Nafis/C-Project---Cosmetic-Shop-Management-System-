@@ -38,6 +38,9 @@ namespace Cosmatic_Shop_Management.Forms
             btnFloatingAdd.Click -= btnFloatingAdd_Click;
             btnFloatingAdd.Click += btnFloatingAdd_Click;
 
+            btnBack.Click -= btnBack_Click;
+            btnBack.Click += btnBack_Click;
+
             txtSearchUsers.TextChanged -= txtSearchUsers_TextChanged;
             txtSearchUsers.TextChanged += txtSearchUsers_TextChanged;
 
@@ -414,17 +417,37 @@ namespace Cosmatic_Shop_Management.Forms
             {
                 RegisterForm form = new RegisterForm();
                 form.Show();
-                this.Hide();
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Register form is not connected yet.");
+                MessageBox.Show("Register form open error: " + ex.Message);
             }
         }
 
         private void btnFloatingAdd_Click(object? sender, EventArgs e)
         {
-            btnAddUser_Click(sender, e);
+            try
+            {
+                ManageAdministratorAccessForm form = new ManageAdministratorAccessForm();
+                form.ShowDialog();
+
+                LoadUsersFromDatabase();
+                LoadStats();
+                ApplyFiltersAndBind();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Open administrator access form error: " + ex.Message);
+            }
+        }
+
+        private void btnBack_Click(object? sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnFloatingAdd_Click_1(object sender, EventArgs e)
+        {
         }
     }
 }

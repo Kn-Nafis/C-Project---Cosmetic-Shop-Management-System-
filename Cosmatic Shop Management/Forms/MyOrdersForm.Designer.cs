@@ -50,7 +50,6 @@
             lblFilterStatusTitle = new Label();
             dgvMyOrders = new DataGridView();
             pnlOrderDetails = new Panel();
-            btnReview = new Button();
             btnCancelOrder = new Button();
             btnReorder = new Button();
             lblTotalAmountValue = new Label();
@@ -74,6 +73,7 @@
             btnOrderMail = new Button();
             btnViewInvoice = new Button();
             lblOrderDetailsTitle = new Label();
+            btnReview = new Button();
             btnNextPage = new Button();
             btnPage3 = new Button();
             btnPage2 = new Button();
@@ -372,6 +372,7 @@
             pnlOrderDetails.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             pnlOrderDetails.BackColor = Color.White;
             pnlOrderDetails.BorderStyle = BorderStyle.FixedSingle;
+            pnlOrderDetails.Controls.Add(btnReview);
             pnlOrderDetails.Controls.Add(btnCancelOrder);
             pnlOrderDetails.Controls.Add(btnReorder);
             pnlOrderDetails.Controls.Add(lblTotalAmountValue);
@@ -399,19 +400,6 @@
             pnlOrderDetails.Name = "pnlOrderDetails";
             pnlOrderDetails.Size = new Size(475, 817);
             pnlOrderDetails.TabIndex = 3;
-            // 
-            // btnReview
-            // 
-            btnReview.BackColor = Color.Coral;
-            btnReview.FlatAppearance.BorderSize = 0;
-            btnReview.FlatStyle = FlatStyle.Flat;
-            btnReview.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnReview.Location = new Point(20, 942);
-            btnReview.Name = "btnReview";
-            btnReview.Size = new Size(160, 34);
-            btnReview.TabIndex = 38;
-            btnReview.Text = "Give Review";
-            btnReview.UseVisualStyleBackColor = false;
             // 
             // btnCancelOrder
             // 
@@ -679,6 +667,19 @@
             lblOrderDetailsTitle.TabIndex = 0;
             lblOrderDetailsTitle.Text = "Order Details";
             // 
+            // btnReview
+            // 
+            btnReview.BackColor = Color.Coral;
+            btnReview.FlatAppearance.BorderSize = 0;
+            btnReview.FlatStyle = FlatStyle.Flat;
+            btnReview.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnReview.Location = new Point(4, 736);
+            btnReview.Name = "btnReview";
+            btnReview.Size = new Size(160, 53);
+            btnReview.TabIndex = 38;
+            btnReview.Text = "Give Review";
+            btnReview.UseVisualStyleBackColor = false;
+            // 
             // btnNextPage
             // 
             btnNextPage.Anchor = AnchorStyles.Bottom;
@@ -751,7 +752,6 @@
             AutoScroll = true;
             BackColor = Color.Beige;
             ClientSize = new Size(1358, 1043);
-            Controls.Add(btnReview);
             Controls.Add(btnNextPage);
             Controls.Add(pnlOrderDetails);
             Controls.Add(btnPage3);

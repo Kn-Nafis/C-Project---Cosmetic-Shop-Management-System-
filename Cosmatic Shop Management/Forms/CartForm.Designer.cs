@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             pnlMain = new Panel();
+            pnlTableHeader = new Panel();
+            chkSelectAll = new CheckBox();
+            lblHeaderQuantity = new Label();
+            lblHeaderSubtotal = new Label();
+            lblHeaderProduct = new Label();
+            lblHeaderPrice = new Label();
             pnlOrderSummary = new Panel();
             lblSecureCheckout = new Label();
             btnCheckout = new Button();
@@ -45,12 +51,6 @@
             lblSubtotalText = new Label();
             lblOrderSummaryTitle = new Label();
             pnlCartItems = new Panel();
-            pnlTableHeader = new Panel();
-            chkSelectAll = new CheckBox();
-            lblHeaderQuantity = new Label();
-            lblHeaderSubtotal = new Label();
-            lblHeaderProduct = new Label();
-            lblHeaderPrice = new Label();
             pnlCartActions = new Panel();
             lblSelectedItems = new Label();
             btnUpdateQuantity = new Button();
@@ -59,28 +59,96 @@
             btnContinueShopping = new Button();
             lblTitle = new Label();
             pnlMain.SuspendLayout();
+            pnlTableHeader.SuspendLayout();
             pnlOrderSummary.SuspendLayout();
             pnlCartItems.SuspendLayout();
-            pnlTableHeader.SuspendLayout();
             pnlCartActions.SuspendLayout();
             SuspendLayout();
             // 
             // pnlMain
             // 
-            pnlMain.BackColor = Color.WhiteSmoke;
+            pnlMain.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pnlMain.BackColor = Color.Beige;
+            pnlMain.Controls.Add(pnlTableHeader);
             pnlMain.Controls.Add(pnlOrderSummary);
             pnlMain.Controls.Add(pnlCartItems);
             pnlMain.Controls.Add(btnContinueShopping);
             pnlMain.Controls.Add(lblTitle);
-            pnlMain.Dock = DockStyle.Fill;
             pnlMain.Location = new Point(0, 0);
             pnlMain.Name = "pnlMain";
             pnlMain.Padding = new Padding(30, 25, 30, 25);
             pnlMain.Size = new Size(1179, 769);
             pnlMain.TabIndex = 1;
             // 
+            // pnlTableHeader
+            // 
+            pnlTableHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pnlTableHeader.Controls.Add(chkSelectAll);
+            pnlTableHeader.Controls.Add(lblHeaderQuantity);
+            pnlTableHeader.Controls.Add(lblHeaderSubtotal);
+            pnlTableHeader.Controls.Add(lblHeaderProduct);
+            pnlTableHeader.Controls.Add(lblHeaderPrice);
+            pnlTableHeader.Location = new Point(33, 132);
+            pnlTableHeader.Name = "pnlTableHeader";
+            pnlTableHeader.Size = new Size(738, 69);
+            pnlTableHeader.TabIndex = 8;
+            // 
+            // chkSelectAll
+            // 
+            chkSelectAll.AutoSize = true;
+            chkSelectAll.Location = new Point(20, 24);
+            chkSelectAll.Name = "chkSelectAll";
+            chkSelectAll.Size = new Size(22, 21);
+            chkSelectAll.TabIndex = 8;
+            chkSelectAll.UseVisualStyleBackColor = true;
+            // 
+            // lblHeaderQuantity
+            // 
+            lblHeaderQuantity.AutoSize = true;
+            lblHeaderQuantity.CausesValidation = false;
+            lblHeaderQuantity.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblHeaderQuantity.ForeColor = Color.Indigo;
+            lblHeaderQuantity.Location = new Point(500, 18);
+            lblHeaderQuantity.Name = "lblHeaderQuantity";
+            lblHeaderQuantity.Size = new Size(95, 28);
+            lblHeaderQuantity.TabIndex = 7;
+            lblHeaderQuantity.Text = "Quantity";
+            // 
+            // lblHeaderSubtotal
+            // 
+            lblHeaderSubtotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblHeaderSubtotal.ForeColor = Color.Indigo;
+            lblHeaderSubtotal.Location = new Point(630, 18);
+            lblHeaderSubtotal.Name = "lblHeaderSubtotal";
+            lblHeaderSubtotal.Size = new Size(90, 25);
+            lblHeaderSubtotal.TabIndex = 6;
+            lblHeaderSubtotal.Text = "SubTotal";
+            // 
+            // lblHeaderProduct
+            // 
+            lblHeaderProduct.AutoSize = true;
+            lblHeaderProduct.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblHeaderProduct.ForeColor = Color.Indigo;
+            lblHeaderProduct.Location = new Point(70, 18);
+            lblHeaderProduct.Name = "lblHeaderProduct";
+            lblHeaderProduct.Size = new Size(86, 28);
+            lblHeaderProduct.TabIndex = 2;
+            lblHeaderProduct.Text = "Product";
+            // 
+            // lblHeaderPrice
+            // 
+            lblHeaderPrice.AutoSize = true;
+            lblHeaderPrice.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblHeaderPrice.ForeColor = Color.Indigo;
+            lblHeaderPrice.Location = new Point(390, 18);
+            lblHeaderPrice.Name = "lblHeaderPrice";
+            lblHeaderPrice.Size = new Size(59, 28);
+            lblHeaderPrice.TabIndex = 3;
+            lblHeaderPrice.Text = "Price";
+            // 
             // pnlOrderSummary
             // 
+            pnlOrderSummary.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pnlOrderSummary.BackColor = Color.White;
             pnlOrderSummary.BorderStyle = BorderStyle.FixedSingle;
             pnlOrderSummary.Controls.Add(lblSecureCheckout);
@@ -97,7 +165,7 @@
             pnlOrderSummary.Controls.Add(lblSubtotal);
             pnlOrderSummary.Controls.Add(lblSubtotalText);
             pnlOrderSummary.Controls.Add(lblOrderSummaryTitle);
-            pnlOrderSummary.Location = new Point(800, 120);
+            pnlOrderSummary.Location = new Point(801, 132);
             pnlOrderSummary.Name = "pnlOrderSummary";
             pnlOrderSummary.Size = new Size(300, 500);
             pnlOrderSummary.TabIndex = 3;
@@ -250,88 +318,23 @@
             // 
             // pnlCartItems
             // 
+            pnlCartItems.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlCartItems.BackColor = Color.White;
             pnlCartItems.BorderStyle = BorderStyle.FixedSingle;
-            pnlCartItems.Controls.Add(pnlTableHeader);
             pnlCartItems.Controls.Add(pnlCartActions);
             pnlCartItems.Controls.Add(flowCartItems);
-            pnlCartItems.Location = new Point(35, 120);
+            pnlCartItems.Location = new Point(33, 206);
             pnlCartItems.Name = "pnlCartItems";
-            pnlCartItems.Size = new Size(740, 500);
+            pnlCartItems.Size = new Size(740, 535);
             pnlCartItems.TabIndex = 2;
-            // 
-            // pnlTableHeader
-            // 
-            pnlTableHeader.Controls.Add(chkSelectAll);
-            pnlTableHeader.Controls.Add(lblHeaderQuantity);
-            pnlTableHeader.Controls.Add(lblHeaderSubtotal);
-            pnlTableHeader.Controls.Add(lblHeaderProduct);
-            pnlTableHeader.Controls.Add(lblHeaderPrice);
-            pnlTableHeader.Dock = DockStyle.Top;
-            pnlTableHeader.Location = new Point(0, 0);
-            pnlTableHeader.Name = "pnlTableHeader";
-            pnlTableHeader.Size = new Size(738, 55);
-            pnlTableHeader.TabIndex = 8;
-            // 
-            // chkSelectAll
-            // 
-            chkSelectAll.AutoSize = true;
-            chkSelectAll.Location = new Point(20, 18);
-            chkSelectAll.Name = "chkSelectAll";
-            chkSelectAll.Size = new Size(22, 21);
-            chkSelectAll.TabIndex = 8;
-            chkSelectAll.UseVisualStyleBackColor = true;
-            // 
-            // lblHeaderQuantity
-            // 
-            lblHeaderQuantity.AutoSize = true;
-            lblHeaderQuantity.CausesValidation = false;
-            lblHeaderQuantity.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblHeaderQuantity.ForeColor = Color.Indigo;
-            lblHeaderQuantity.Location = new Point(500, 18);
-            lblHeaderQuantity.Name = "lblHeaderQuantity";
-            lblHeaderQuantity.Size = new Size(95, 28);
-            lblHeaderQuantity.TabIndex = 7;
-            lblHeaderQuantity.Text = "Quantity";
-            // 
-            // lblHeaderSubtotal
-            // 
-            lblHeaderSubtotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblHeaderSubtotal.ForeColor = Color.Indigo;
-            lblHeaderSubtotal.Location = new Point(630, 18);
-            lblHeaderSubtotal.Name = "lblHeaderSubtotal";
-            lblHeaderSubtotal.Size = new Size(90, 25);
-            lblHeaderSubtotal.TabIndex = 6;
-            lblHeaderSubtotal.Text = "SubTotal";
-            // 
-            // lblHeaderProduct
-            // 
-            lblHeaderProduct.AutoSize = true;
-            lblHeaderProduct.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblHeaderProduct.ForeColor = Color.Indigo;
-            lblHeaderProduct.Location = new Point(70, 18);
-            lblHeaderProduct.Name = "lblHeaderProduct";
-            lblHeaderProduct.Size = new Size(86, 28);
-            lblHeaderProduct.TabIndex = 2;
-            lblHeaderProduct.Text = "Product";
-            // 
-            // lblHeaderPrice
-            // 
-            lblHeaderPrice.AutoSize = true;
-            lblHeaderPrice.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblHeaderPrice.ForeColor = Color.Indigo;
-            lblHeaderPrice.Location = new Point(390, 18);
-            lblHeaderPrice.Name = "lblHeaderPrice";
-            lblHeaderPrice.Size = new Size(59, 28);
-            lblHeaderPrice.TabIndex = 3;
-            lblHeaderPrice.Text = "Price";
             // 
             // pnlCartActions
             // 
+            pnlCartActions.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlCartActions.Controls.Add(lblSelectedItems);
             pnlCartActions.Controls.Add(btnUpdateQuantity);
             pnlCartActions.Controls.Add(btnRemoveSelected);
-            pnlCartActions.Location = new Point(0, 405);
+            pnlCartActions.Location = new Point(0, 427);
             pnlCartActions.Name = "pnlCartActions";
             pnlCartActions.Size = new Size(738, 88);
             pnlCartActions.TabIndex = 7;
@@ -352,9 +355,9 @@
             btnUpdateQuantity.FlatStyle = FlatStyle.Flat;
             btnUpdateQuantity.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnUpdateQuantity.ForeColor = Color.Indigo;
-            btnUpdateQuantity.Location = new Point(254, 25);
+            btnUpdateQuantity.Location = new Point(254, 18);
             btnUpdateQuantity.Name = "btnUpdateQuantity";
-            btnUpdateQuantity.Size = new Size(216, 40);
+            btnUpdateQuantity.Size = new Size(216, 47);
             btnUpdateQuantity.TabIndex = 2;
             btnUpdateQuantity.Text = "🔄Update Quantity";
             btnUpdateQuantity.UseVisualStyleBackColor = true;
@@ -365,31 +368,32 @@
             btnRemoveSelected.FlatStyle = FlatStyle.Flat;
             btnRemoveSelected.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnRemoveSelected.ForeColor = Color.Red;
-            btnRemoveSelected.Location = new Point(25, 25);
+            btnRemoveSelected.Location = new Point(20, 18);
             btnRemoveSelected.Name = "btnRemoveSelected";
-            btnRemoveSelected.Size = new Size(212, 40);
+            btnRemoveSelected.Size = new Size(212, 47);
             btnRemoveSelected.TabIndex = 1;
             btnRemoveSelected.Text = "🗑️Remove Selected";
             btnRemoveSelected.UseVisualStyleBackColor = true;
             // 
             // flowCartItems
             // 
+            flowCartItems.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             flowCartItems.AutoScroll = true;
-            flowCartItems.Dock = DockStyle.Fill;
             flowCartItems.FlowDirection = FlowDirection.TopDown;
             flowCartItems.Location = new Point(0, 0);
             flowCartItems.Name = "flowCartItems";
-            flowCartItems.Size = new Size(738, 498);
+            flowCartItems.Size = new Size(738, 533);
             flowCartItems.TabIndex = 6;
             flowCartItems.WrapContents = false;
             // 
             // btnContinueShopping
             // 
+            btnContinueShopping.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnContinueShopping.BackColor = Color.White;
             btnContinueShopping.FlatAppearance.BorderColor = Color.FromArgb(139, 92, 246);
             btnContinueShopping.FlatStyle = FlatStyle.Flat;
-            btnContinueShopping.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnContinueShopping.ForeColor = Color.Coral;
+            btnContinueShopping.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnContinueShopping.ForeColor = Color.Black;
             btnContinueShopping.Location = new Point(850, 42);
             btnContinueShopping.Name = "btnContinueShopping";
             btnContinueShopping.Size = new Size(210, 42);
@@ -402,7 +406,7 @@
             // 
             lblTitle.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitle.ForeColor = Color.Coral;
-            lblTitle.Location = new Point(33, 25);
+            lblTitle.Location = new Point(33, 42);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(325, 67);
             lblTitle.TabIndex = 0;
@@ -415,14 +419,16 @@
             ClientSize = new Size(1179, 769);
             Controls.Add(pnlMain);
             Name = "CartForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "CartForm";
+            WindowState = FormWindowState.Maximized;
             Load += CartForm_Load_1;
             pnlMain.ResumeLayout(false);
+            pnlTableHeader.ResumeLayout(false);
+            pnlTableHeader.PerformLayout();
             pnlOrderSummary.ResumeLayout(false);
             pnlOrderSummary.PerformLayout();
             pnlCartItems.ResumeLayout(false);
-            pnlTableHeader.ResumeLayout(false);
-            pnlTableHeader.PerformLayout();
             pnlCartActions.ResumeLayout(false);
             ResumeLayout(false);
         }

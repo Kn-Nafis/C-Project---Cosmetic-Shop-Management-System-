@@ -73,13 +73,13 @@
             // 
             // pnlTotalProducts
             // 
-            pnlTotalProducts.BackColor = Color.White;
+            pnlTotalProducts.BackColor = Color.Thistle;
             pnlTotalProducts.BorderStyle = BorderStyle.FixedSingle;
             pnlTotalProducts.Controls.Add(lblTotalProducts);
             pnlTotalProducts.Controls.Add(lblTotalProductsTitle);
             pnlTotalProducts.Location = new Point(34, 108);
             pnlTotalProducts.Name = "pnlTotalProducts";
-            pnlTotalProducts.Size = new Size(168, 168);
+            pnlTotalProducts.Size = new Size(229, 168);
             pnlTotalProducts.TabIndex = 1;
             // 
             // lblTotalProducts
@@ -89,9 +89,9 @@
             lblTotalProducts.ForeColor = Color.FromArgb(74, 20, 140);
             lblTotalProducts.Location = new Point(3, 72);
             lblTotalProducts.Name = "lblTotalProducts";
-            lblTotalProducts.Size = new Size(101, 45);
+            lblTotalProducts.Size = new Size(92, 45);
             lblTotalProducts.TabIndex = 1;
-            lblTotalProducts.Text = "Value";
+            lblTotalProducts.Text = "0000";
             // 
             // lblTotalProductsTitle
             // 
@@ -104,13 +104,14 @@
             // 
             // pnlTotalOrders
             // 
+            pnlTotalOrders.Anchor = AnchorStyles.Top;
             pnlTotalOrders.BackColor = Color.White;
             pnlTotalOrders.BorderStyle = BorderStyle.FixedSingle;
             pnlTotalOrders.Controls.Add(lblTotalOrders);
             pnlTotalOrders.Controls.Add(lblTotalOrdersTitle);
             pnlTotalOrders.Location = new Point(269, 108);
             pnlTotalOrders.Name = "pnlTotalOrders";
-            pnlTotalOrders.Size = new Size(168, 168);
+            pnlTotalOrders.Size = new Size(231, 168);
             pnlTotalOrders.TabIndex = 2;
             // 
             // lblTotalOrders
@@ -120,9 +121,9 @@
             lblTotalOrders.ForeColor = Color.FromArgb(74, 20, 140);
             lblTotalOrders.Location = new Point(3, 83);
             lblTotalOrders.Name = "lblTotalOrders";
-            lblTotalOrders.Size = new Size(101, 45);
+            lblTotalOrders.Size = new Size(92, 45);
             lblTotalOrders.TabIndex = 2;
-            lblTotalOrders.Text = "Value";
+            lblTotalOrders.Text = "0000";
             // 
             // lblTotalOrdersTitle
             // 
@@ -135,13 +136,14 @@
             // 
             // pnlGrossSales
             // 
-            pnlGrossSales.BackColor = Color.White;
+            pnlGrossSales.Anchor = AnchorStyles.Top;
+            pnlGrossSales.BackColor = Color.Thistle;
             pnlGrossSales.BorderStyle = BorderStyle.FixedSingle;
             pnlGrossSales.Controls.Add(lblGrossSales);
             pnlGrossSales.Controls.Add(lblGrossSalesTitle);
             pnlGrossSales.Location = new Point(506, 108);
             pnlGrossSales.Name = "pnlGrossSales";
-            pnlGrossSales.Size = new Size(168, 168);
+            pnlGrossSales.Size = new Size(227, 168);
             pnlGrossSales.TabIndex = 2;
             // 
             // lblGrossSales
@@ -151,9 +153,9 @@
             lblGrossSales.ForeColor = Color.FromArgb(74, 20, 140);
             lblGrossSales.Location = new Point(4, 83);
             lblGrossSales.Name = "lblGrossSales";
-            lblGrossSales.Size = new Size(101, 45);
+            lblGrossSales.Size = new Size(92, 45);
             lblGrossSales.TabIndex = 3;
-            lblGrossSales.Text = "Value";
+            lblGrossSales.Text = "0000";
             // 
             // lblGrossSalesTitle
             // 
@@ -166,13 +168,14 @@
             // 
             // pnlNetIncome
             // 
+            pnlNetIncome.Anchor = AnchorStyles.Top;
             pnlNetIncome.BackColor = Color.White;
             pnlNetIncome.BorderStyle = BorderStyle.FixedSingle;
             pnlNetIncome.Controls.Add(lblNetIncome);
             pnlNetIncome.Controls.Add(blNetIncomeTitle);
             pnlNetIncome.Location = new Point(739, 108);
             pnlNetIncome.Name = "pnlNetIncome";
-            pnlNetIncome.Size = new Size(168, 168);
+            pnlNetIncome.Size = new Size(221, 168);
             pnlNetIncome.TabIndex = 2;
             // 
             // lblNetIncome
@@ -182,9 +185,9 @@
             lblNetIncome.ForeColor = Color.FromArgb(74, 20, 140);
             lblNetIncome.Location = new Point(6, 83);
             lblNetIncome.Name = "lblNetIncome";
-            lblNetIncome.Size = new Size(101, 45);
+            lblNetIncome.Size = new Size(92, 45);
             lblNetIncome.TabIndex = 3;
-            lblNetIncome.Text = "Value";
+            lblNetIncome.Text = "0000";
             // 
             // blNetIncomeTitle
             // 
@@ -197,13 +200,14 @@
             // 
             // pnlLowStock
             // 
-            pnlLowStock.BackColor = Color.White;
+            pnlLowStock.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pnlLowStock.BackColor = Color.Thistle;
             pnlLowStock.BorderStyle = BorderStyle.FixedSingle;
             pnlLowStock.Controls.Add(lblLowStock);
             pnlLowStock.Controls.Add(lblLowStockTitle);
             pnlLowStock.Location = new Point(966, 108);
             pnlLowStock.Name = "pnlLowStock";
-            pnlLowStock.Size = new Size(168, 168);
+            pnlLowStock.Size = new Size(216, 168);
             pnlLowStock.TabIndex = 4;
             // 
             // lblLowStock
@@ -213,9 +217,9 @@
             lblLowStock.ForeColor = Color.FromArgb(74, 20, 140);
             lblLowStock.Location = new Point(3, 83);
             lblLowStock.Name = "lblLowStock";
-            lblLowStock.Size = new Size(101, 45);
+            lblLowStock.Size = new Size(92, 45);
             lblLowStock.TabIndex = 3;
-            lblLowStock.Text = "Value";
+            lblLowStock.Text = "0000";
             // 
             // lblLowStockTitle
             // 
@@ -230,6 +234,7 @@
             // 
             dgvRecentOrders.AllowUserToAddRows = false;
             dgvRecentOrders.AllowUserToDeleteRows = false;
+            dgvRecentOrders.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dgvRecentOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvRecentOrders.BackgroundColor = SystemColors.ButtonHighlight;
             dgvRecentOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -244,60 +249,71 @@
             // 
             // btnManageShop
             // 
-            btnManageShop.BackColor = Color.Coral;
+            btnManageShop.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnManageShop.BackColor = Color.Transparent;
             btnManageShop.Cursor = Cursors.Hand;
-            btnManageShop.FlatAppearance.BorderSize = 0;
+            btnManageShop.FlatAppearance.BorderColor = Color.FromArgb(74, 20, 140);
+            btnManageShop.FlatAppearance.BorderSize = 2;
             btnManageShop.FlatStyle = FlatStyle.Flat;
-            btnManageShop.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnManageShop.Font = new Font("Segoe UI Emoji", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnManageShop.ForeColor = Color.FromArgb(74, 20, 140);
             btnManageShop.Location = new Point(850, 371);
             btnManageShop.Name = "btnManageShop";
-            btnManageShop.Size = new Size(314, 34);
+            btnManageShop.Size = new Size(212, 52);
             btnManageShop.TabIndex = 6;
-            btnManageShop.Text = "Manage Shop";
+            btnManageShop.Text = "🛠Manage Shop";
             btnManageShop.UseVisualStyleBackColor = false;
             // 
             // btnManageProducts
             // 
-            btnManageProducts.BackColor = Color.Coral;
+            btnManageProducts.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnManageProducts.BackColor = Color.Transparent;
             btnManageProducts.Cursor = Cursors.Hand;
-            btnManageProducts.FlatAppearance.BorderSize = 0;
+            btnManageProducts.FlatAppearance.BorderColor = Color.FromArgb(74, 20, 140);
+            btnManageProducts.FlatAppearance.BorderSize = 2;
             btnManageProducts.FlatStyle = FlatStyle.Flat;
-            btnManageProducts.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnManageProducts.Font = new Font("Segoe UI Emoji", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnManageProducts.ForeColor = Color.FromArgb(74, 20, 140);
             btnManageProducts.Location = new Point(850, 429);
             btnManageProducts.Name = "btnManageProducts";
-            btnManageProducts.Size = new Size(314, 34);
+            btnManageProducts.Size = new Size(212, 52);
             btnManageProducts.TabIndex = 7;
-            btnManageProducts.Text = "Manage Products";
+            btnManageProducts.Text = "📋Manage Products";
             btnManageProducts.UseVisualStyleBackColor = false;
             // 
             // btnOrders
             // 
-            btnOrders.BackColor = Color.Coral;
+            btnOrders.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnOrders.BackColor = Color.Transparent;
             btnOrders.Cursor = Cursors.Hand;
-            btnOrders.FlatAppearance.BorderSize = 0;
+            btnOrders.FlatAppearance.BorderColor = Color.FromArgb(74, 20, 140);
+            btnOrders.FlatAppearance.BorderSize = 2;
             btnOrders.FlatStyle = FlatStyle.Flat;
             btnOrders.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnOrders.ForeColor = Color.FromArgb(74, 20, 140);
             btnOrders.Location = new Point(850, 487);
             btnOrders.Name = "btnOrders";
-            btnOrders.Size = new Size(314, 34);
+            btnOrders.Size = new Size(212, 54);
             btnOrders.TabIndex = 8;
-            btnOrders.Text = "Orders";
+            btnOrders.Text = "📦Orders";
             btnOrders.UseVisualStyleBackColor = false;
             // 
             // btnReports
             // 
-            btnReports.BackColor = Color.Coral;
+            btnReports.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnReports.BackColor = Color.Transparent;
             btnReports.Cursor = Cursors.Hand;
-            btnReports.FlatAppearance.BorderSize = 0;
+            btnReports.FlatAppearance.BorderColor = Color.FromArgb(74, 20, 140);
+            btnReports.FlatAppearance.BorderSize = 2;
             btnReports.FlatStyle = FlatStyle.Flat;
-            btnReports.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnReports.Font = new Font("Segoe UI Emoji", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnReports.ForeColor = Color.FromArgb(74, 20, 140);
             btnReports.Location = new Point(850, 547);
             btnReports.Name = "btnReports";
-            btnReports.Size = new Size(314, 34);
+            btnReports.Size = new Size(212, 55);
             btnReports.TabIndex = 9;
-            btnReports.Text = "Reports";
+            btnReports.Text = "📊Reports";
             btnReports.UseVisualStyleBackColor = false;
-            btnReports.Visible = false;
             // 
             // btnEmployees
             // 
@@ -308,7 +324,7 @@
             btnEmployees.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnEmployees.Location = new Point(850, 608);
             btnEmployees.Name = "btnEmployees";
-            btnEmployees.Size = new Size(314, 34);
+            btnEmployees.Size = new Size(175, 34);
             btnEmployees.TabIndex = 10;
             btnEmployees.Text = "Employees";
             btnEmployees.UseVisualStyleBackColor = false;
@@ -316,16 +332,18 @@
             // 
             // btnLogout
             // 
-            btnLogout.BackColor = Color.Red;
+            btnLogout.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnLogout.BackColor = Color.Transparent;
             btnLogout.Cursor = Cursors.Hand;
             btnLogout.FlatAppearance.BorderSize = 0;
             btnLogout.FlatStyle = FlatStyle.Flat;
-            btnLogout.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnLogout.Location = new Point(1029, 785);
+            btnLogout.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            btnLogout.ForeColor = Color.Firebrick;
+            btnLogout.Location = new Point(1023, 5);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(135, 34);
+            btnLogout.Size = new Size(159, 60);
             btnLogout.TabIndex = 11;
-            btnLogout.Text = "Logout";
+            btnLogout.Text = "↩ Logout";
             btnLogout.UseVisualStyleBackColor = false;
             // 
             // lblRecentOrdersTitle
@@ -344,7 +362,7 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Beige;
-            ClientSize = new Size(1194, 831);
+            ClientSize = new Size(1211, 831);
             Controls.Add(lblRecentOrdersTitle);
             Controls.Add(btnLogout);
             Controls.Add(btnEmployees);
@@ -364,6 +382,7 @@
             Name = "AdminDashboardForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AdminDashboardForm";
+            WindowState = FormWindowState.Maximized;
             Load += AdminDashboardForm_Load;
             pnlTotalProducts.ResumeLayout(false);
             pnlTotalProducts.PerformLayout();

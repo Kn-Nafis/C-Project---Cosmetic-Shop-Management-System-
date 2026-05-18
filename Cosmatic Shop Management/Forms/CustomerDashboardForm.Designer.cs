@@ -65,12 +65,11 @@
             // 
             // lblBrandText
             // 
-            lblBrandText.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblBrandText.AutoSize = true;
             lblBrandText.BackColor = Color.Transparent;
             lblBrandText.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
             lblBrandText.ForeColor = Color.Black;
-            lblBrandText.Location = new Point(6, 26);
+            lblBrandText.Location = new Point(77, 26);
             lblBrandText.Name = "lblBrandText";
             lblBrandText.Size = new Size(230, 45);
             lblBrandText.TabIndex = 0;
@@ -78,7 +77,7 @@
             // 
             // btnCart
             // 
-            btnCart.Anchor = AnchorStyles.Top;
+            btnCart.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnCart.BackColor = Color.White;
             btnCart.Cursor = Cursors.Hand;
             btnCart.FlatAppearance.BorderSize = 0;
@@ -86,7 +85,7 @@
             btnCart.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCart.ForeColor = Color.Black;
             btnCart.Image = (Image)resources.GetObject("btnCart.Image");
-            btnCart.Location = new Point(1058, 23);
+            btnCart.Location = new Point(1094, 23);
             btnCart.Margin = new Padding(0);
             btnCart.Name = "btnCart";
             btnCart.Size = new Size(60, 60);
@@ -100,16 +99,15 @@
             txtSearchProducts.BorderStyle = BorderStyle.FixedSingle;
             txtSearchProducts.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtSearchProducts.ForeColor = Color.DimGray;
-            txtSearchProducts.Location = new Point(260, 36);
+            txtSearchProducts.Location = new Point(294, 21);
             txtSearchProducts.Multiline = true;
             txtSearchProducts.Name = "txtSearchProducts";
-            txtSearchProducts.PlaceholderText = "🔍︎Search products";
-            txtSearchProducts.Size = new Size(319, 32);
+            txtSearchProducts.PlaceholderText = "  🔍︎Search products";
+            txtSearchProducts.Size = new Size(319, 46);
             txtSearchProducts.TabIndex = 3;
             // 
             // pnlTopHeader
             // 
-            pnlTopHeader.Anchor = AnchorStyles.Top;
             pnlTopHeader.BackColor = Color.White;
             pnlTopHeader.BorderStyle = BorderStyle.FixedSingle;
             pnlTopHeader.Controls.Add(btnLogout);
@@ -122,15 +120,16 @@
             pnlTopHeader.Controls.Add(lblBrandText);
             pnlTopHeader.Controls.Add(txtSearchProducts);
             pnlTopHeader.Controls.Add(btnCart);
-            pnlTopHeader.Location = new Point(35, 9);
+            pnlTopHeader.Dock = DockStyle.Top;
+            pnlTopHeader.Location = new Point(0, 0);
             pnlTopHeader.Margin = new Padding(0);
             pnlTopHeader.Name = "pnlTopHeader";
-            pnlTopHeader.Size = new Size(1329, 93);
+            pnlTopHeader.Size = new Size(1400, 93);
             pnlTopHeader.TabIndex = 9;
             // 
             // btnLogout
             // 
-            btnLogout.Anchor = AnchorStyles.Top;
+            btnLogout.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnLogout.BackColor = Color.White;
             btnLogout.Cursor = Cursors.Hand;
             btnLogout.FlatAppearance.BorderSize = 0;
@@ -138,7 +137,7 @@
             btnLogout.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLogout.ForeColor = Color.Black;
             btnLogout.Image = (Image)resources.GetObject("btnLogout.Image");
-            btnLogout.Location = new Point(1255, 23);
+            btnLogout.Location = new Point(1291, 23);
             btnLogout.Margin = new Padding(0);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(60, 60);
@@ -147,7 +146,7 @@
             // 
             // btnProfile
             // 
-            btnProfile.Anchor = AnchorStyles.Top;
+            btnProfile.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnProfile.BackColor = Color.White;
             btnProfile.Cursor = Cursors.Hand;
             btnProfile.FlatAppearance.BorderSize = 0;
@@ -155,7 +154,7 @@
             btnProfile.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnProfile.ForeColor = Color.Black;
             btnProfile.Image = (Image)resources.GetObject("btnProfile.Image");
-            btnProfile.Location = new Point(1195, 23);
+            btnProfile.Location = new Point(1169, 21);
             btnProfile.Margin = new Padding(0);
             btnProfile.Name = "btnProfile";
             btnProfile.Size = new Size(60, 60);
@@ -173,12 +172,13 @@
             btnWishlist.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnWishlist.ForeColor = Color.Black;
             btnWishlist.Image = (Image)resources.GetObject("btnWishlist.Image");
-            btnWishlist.Location = new Point(1133, 22);
+            btnWishlist.Location = new Point(1169, 22);
             btnWishlist.Margin = new Padding(0);
             btnWishlist.Name = "btnWishlist";
             btnWishlist.Size = new Size(60, 60);
             btnWishlist.TabIndex = 8;
             btnWishlist.UseVisualStyleBackColor = false;
+            btnWishlist.Visible = false;
             // 
             // lnkBoutique
             // 
@@ -193,6 +193,7 @@
             lnkBoutique.TabIndex = 7;
             lnkBoutique.TabStop = true;
             lnkBoutique.Text = "Boutique";
+            lnkBoutique.Visible = false;
             lnkBoutique.VisitedLinkColor = Color.LightGray;
             // 
             // lnkBestSellers
@@ -208,6 +209,7 @@
             lnkBestSellers.TabIndex = 6;
             lnkBestSellers.TabStop = true;
             lnkBestSellers.Text = "Best Sellers";
+            lnkBestSellers.Visible = false;
             lnkBestSellers.VisitedLinkColor = Color.LightGray;
             // 
             // lnkNewArrivals
@@ -223,6 +225,7 @@
             lnkNewArrivals.TabIndex = 5;
             lnkNewArrivals.TabStop = true;
             lnkNewArrivals.Text = "New Arrivals";
+            lnkNewArrivals.Visible = false;
             lnkNewArrivals.VisitedLinkColor = Color.LightGray;
             // 
             // lnkCollections
@@ -238,11 +241,12 @@
             lnkCollections.TabIndex = 4;
             lnkCollections.TabStop = true;
             lnkCollections.Text = "Collections";
+            lnkCollections.Visible = false;
             lnkCollections.VisitedLinkColor = Color.LightGray;
             // 
             // pnlHeroBanner
             // 
-            pnlHeroBanner.Anchor = AnchorStyles.Top;
+            pnlHeroBanner.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlHeroBanner.BackColor = Color.FromArgb(1, 22, 39);
             pnlHeroBanner.BorderStyle = BorderStyle.FixedSingle;
             pnlHeroBanner.Controls.Add(btnShopCollection);
@@ -369,29 +373,26 @@
             // 
             // lblHighlightedProductsTitle
             // 
-            lblHighlightedProductsTitle.Anchor = AnchorStyles.None;
             lblHighlightedProductsTitle.AutoSize = true;
             lblHighlightedProductsTitle.BackColor = Color.Transparent;
             lblHighlightedProductsTitle.Font = new Font("Segoe UI", 16F);
             lblHighlightedProductsTitle.ForeColor = Color.Black;
-            lblHighlightedProductsTitle.Location = new Point(85, 886);
+            lblHighlightedProductsTitle.Location = new Point(85, 865);
             lblHighlightedProductsTitle.Name = "lblHighlightedProductsTitle";
-            lblHighlightedProductsTitle.Size = new Size(322, 45);
+            lblHighlightedProductsTitle.Size = new Size(154, 45);
             lblHighlightedProductsTitle.TabIndex = 13;
-            lblHighlightedProductsTitle.Text = "Highlighted Products";
+            lblHighlightedProductsTitle.Text = " Products";
             // 
             // lblHighlightedProductsSubtitle
             // 
-            lblHighlightedProductsSubtitle.Anchor = AnchorStyles.Top;
             lblHighlightedProductsSubtitle.AutoSize = true;
             lblHighlightedProductsSubtitle.BackColor = Color.Transparent;
             lblHighlightedProductsSubtitle.Font = new Font("Segoe UI", 11F);
             lblHighlightedProductsSubtitle.ForeColor = Color.DimGray;
-            lblHighlightedProductsSubtitle.Location = new Point(394, 911);
+            lblHighlightedProductsSubtitle.Location = new Point(334, 887);
             lblHighlightedProductsSubtitle.Name = "lblHighlightedProductsSubtitle";
-            lblHighlightedProductsSubtitle.Size = new Size(393, 30);
+            lblHighlightedProductsSubtitle.Size = new Size(0, 30);
             lblHighlightedProductsSubtitle.TabIndex = 14;
-            lblHighlightedProductsSubtitle.Text = "Our most coveted items for this month.";
             // 
             // btnFilterView
             // 
@@ -406,6 +407,7 @@
             btnFilterView.Size = new Size(40, 40);
             btnFilterView.TabIndex = 15;
             btnFilterView.UseVisualStyleBackColor = false;
+            btnFilterView.Visible = false;
             // 
             // btnGridView
             // 
@@ -420,13 +422,14 @@
             btnGridView.Size = new Size(40, 40);
             btnGridView.TabIndex = 16;
             btnGridView.UseVisualStyleBackColor = false;
+            btnGridView.Visible = false;
             // 
             // flpHighlightedProducts
             // 
-            flpHighlightedProducts.Anchor = AnchorStyles.None;
+            flpHighlightedProducts.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             flpHighlightedProducts.AutoScroll = true;
             flpHighlightedProducts.BackColor = Color.White;
-            flpHighlightedProducts.Location = new Point(85, 964);
+            flpHighlightedProducts.Location = new Point(102, 934);
             flpHighlightedProducts.Name = "flpHighlightedProducts";
             flpHighlightedProducts.Size = new Size(1169, 236);
             flpHighlightedProducts.TabIndex = 17;
@@ -439,7 +442,7 @@
             pnlMaleSection.Controls.Add(lnkMaleBrowse);
             pnlMaleSection.Controls.Add(lblMaleTitle);
             pnlMaleSection.Controls.Add(lblMaleSubtitle);
-            pnlMaleSection.Location = new Point(85, 474);
+            pnlMaleSection.Location = new Point(85, 457);
             pnlMaleSection.Name = "pnlMaleSection";
             pnlMaleSection.Size = new Size(600, 400);
             pnlMaleSection.TabIndex = 18;
@@ -452,7 +455,7 @@
             pnlFemaleSection.Controls.Add(lnkFemaleBrowse);
             pnlFemaleSection.Controls.Add(lblFemaleTitle);
             pnlFemaleSection.Controls.Add(lblFemaleSubtitle);
-            pnlFemaleSection.Location = new Point(717, 474);
+            pnlFemaleSection.Location = new Point(717, 457);
             pnlFemaleSection.Name = "pnlFemaleSection";
             pnlFemaleSection.Size = new Size(600, 400);
             pnlFemaleSection.TabIndex = 19;

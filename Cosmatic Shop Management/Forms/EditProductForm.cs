@@ -5,12 +5,14 @@ using System.IO;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using Cosmatic_Shop_Management.DAL;
+using Cosmatic_Shop_Management.Helpers;
 
 namespace Cosmatic_Shop_Management.Forms
 {
     public partial class EditProductForm : Form
     {
         private int productId;
+        private int myShopId = 0;
         private string selectedImagePath = "";
 
         public EditProductForm()
@@ -46,6 +48,15 @@ namespace Cosmatic_Shop_Management.Forms
 
         private void EditProductForm_Load(object sender, EventArgs e)
         {
+            myShopId = GetMyShopId();
+
+            if (myShopId <= 0)
+            {
+                MessageBox.Show("No shop found for this admin.");
+                this.Close();
+                return;
+            }
+
             LoadCategories();
             LoadGenderOptions();
 
@@ -57,6 +68,35 @@ namespace Cosmatic_Shop_Management.Forms
             {
                 MessageBox.Show("No product selected.");
                 this.Close();
+            }
+        }
+
+        private int GetMyShopId()
+        {
+            try
+            {
+                string query = @"
+                    SELECT TOP 1 ShopId
+                    FROM Shops
+                    WHERE OwnerUserId = @OwnerUserId
+                    ORDER BY ShopId DESC
+                ";
+
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OwnerUserId", SessionManager.UserId)
+                };
+
+                object result = DatabaseHelper.ExecuteScalar(query, parameters);
+
+                if (result == null || result == DBNull.Value)
+                    return 0;
+
+                return Convert.ToInt32(result);
+            }
+            catch
+            {
+                return 0;
             }
         }
 
@@ -103,19 +143,22 @@ namespace Cosmatic_Shop_Management.Forms
                         P.CategoryId,
                         P.CreatedAt
                     FROM Products P
+                    INNER JOIN Shops S ON P.ShopId = S.ShopId
                     WHERE P.ProductId = @ProductId
+                      AND S.OwnerUserId = @OwnerUserId
                 ";
 
                 SqlParameter[] parameters =
                 {
-                    new SqlParameter("@ProductId", productId)
+                    new SqlParameter("@ProductId", productId),
+                    new SqlParameter("@OwnerUserId", SessionManager.UserId)
                 };
 
                 DataTable dt = DatabaseHelper.GetDataTable(query, parameters);
 
                 if (dt.Rows.Count == 0)
                 {
-                    MessageBox.Show("Product not found.");
+                    MessageBox.Show("Product not found or you do not have permission to edit it.");
                     this.Close();
                     return;
                 }
@@ -252,17 +295,20 @@ namespace Cosmatic_Shop_Management.Forms
                 bool isActive = chkIsActive.Checked;
 
                 string query = @"
-                    UPDATE Products
+                    UPDATE P
                     SET
-                        ProductName = @ProductName,
-                        Description = @Description,
-                        Price = @Price,
-                        StockQty = @StockQty,
-                        CategoryId = @CategoryId,
-                        GenderSection = @GenderSection,
-                        ImagePath = @ImagePath,
-                        IsActive = @IsActive
-                    WHERE ProductId = @ProductId
+                        P.ProductName = @ProductName,
+                        P.Description = @Description,
+                        P.Price = @Price,
+                        P.StockQty = @StockQty,
+                        P.CategoryId = @CategoryId,
+                        P.GenderSection = @GenderSection,
+                        P.ImagePath = @ImagePath,
+                        P.IsActive = @IsActive
+                    FROM Products P
+                    INNER JOIN Shops S ON P.ShopId = S.ShopId
+                    WHERE P.ProductId = @ProductId
+                      AND S.OwnerUserId = @OwnerUserId
                 ";
 
                 SqlParameter[] parameters =
@@ -275,7 +321,8 @@ namespace Cosmatic_Shop_Management.Forms
                     new SqlParameter("@GenderSection", gender),
                     new SqlParameter("@ImagePath", string.IsNullOrWhiteSpace(selectedImagePath) ? (object)DBNull.Value : selectedImagePath),
                     new SqlParameter("@IsActive", isActive),
-                    new SqlParameter("@ProductId", productId)
+                    new SqlParameter("@ProductId", productId),
+                    new SqlParameter("@OwnerUserId", SessionManager.UserId)
                 };
 
                 int rows = DatabaseHelper.ExecuteNonQuery(query, parameters);
@@ -287,7 +334,7 @@ namespace Cosmatic_Shop_Management.Forms
                 }
                 else
                 {
-                    MessageBox.Show("No changes were made.");
+                    MessageBox.Show("No changes were made, or you do not have permission.");
                 }
             }
             catch (Exception ex)
@@ -301,8 +348,8 @@ namespace Cosmatic_Shop_Management.Forms
             try
             {
                 DialogResult dr = MessageBox.Show(
-                    "Are you sure you want to delete this product?",
-                    "Confirm Delete",
+                    "Are you sure you want to deactivate this product?",
+                    "Confirm",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning);
 
@@ -310,14 +357,18 @@ namespace Cosmatic_Shop_Management.Forms
                     return;
 
                 string query = @"
-                    UPDATE Products
-                    SET IsActive = 0
-                    WHERE ProductId = @ProductId
+                    UPDATE P
+                    SET P.IsActive = 0
+                    FROM Products P
+                    INNER JOIN Shops S ON P.ShopId = S.ShopId
+                    WHERE P.ProductId = @ProductId
+                      AND S.OwnerUserId = @OwnerUserId
                 ";
 
                 SqlParameter[] parameters =
                 {
-                    new SqlParameter("@ProductId", productId)
+                    new SqlParameter("@ProductId", productId),
+                    new SqlParameter("@OwnerUserId", SessionManager.UserId)
                 };
 
                 int rows = DatabaseHelper.ExecuteNonQuery(query, parameters);
@@ -329,7 +380,7 @@ namespace Cosmatic_Shop_Management.Forms
                 }
                 else
                 {
-                    MessageBox.Show("Delete failed.");
+                    MessageBox.Show("Deactivate failed, or you do not have permission.");
                 }
             }
             catch (Exception ex)
@@ -342,6 +393,7 @@ namespace Cosmatic_Shop_Management.Forms
         {
             this.Close();
         }
+
         private void pnlPriceStock_Paint(object sender, PaintEventArgs e)
         {
         }

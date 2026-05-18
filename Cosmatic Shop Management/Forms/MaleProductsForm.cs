@@ -111,14 +111,14 @@ namespace Cosmatic_Shop_Management.Forms
             flpFemaleProducts.FlowDirection = FlowDirection.LeftToRight;
 
             trkPriceRange.Minimum = 0;
-            trkPriceRange.Maximum = 500;
+            trkPriceRange.Maximum = 10000;
             trkPriceRange.SmallChange = 10;
             trkPriceRange.LargeChange = 25;
-            trkPriceRange.TickFrequency = 25;
-            trkPriceRange.Value = 500;
+            trkPriceRange.TickFrequency = 100;
+            trkPriceRange.Value = 10000;
 
             lblMinPrice.Text = "$0";
-            lblMaxPrice.Text = "$500+";
+            lblMaxPrice.Text = "$10000+";
 
             currentSort = "Newest";
             btnSortNewest.Text = "↕ Sort: Newest";

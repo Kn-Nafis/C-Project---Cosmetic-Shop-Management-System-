@@ -346,22 +346,16 @@ namespace Cosmatic_Shop_Management.Forms
         {
             try
             {
-                if (selectedTopShopId <= 0)
-                {
-                    MessageBox.Show("No shop selected.");
-                    return;
-                }
-
-                ManageShopForm form = new ManageShopForm(selectedTopShopId);
+                SuperviseShopsForm form = new SuperviseShopsForm();
                 form.ShowDialog();
 
                 LoadSummaryCards();
                 LoadRecentTransactions();
                 LoadTopSellingShop();
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Shop details form is not connected yet.");
+                MessageBox.Show("Open supervise shops form error: " + ex.Message);
             }
         }
 

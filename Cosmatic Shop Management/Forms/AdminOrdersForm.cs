@@ -5,6 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using Cosmatic_Shop_Management.DAL;
+using Cosmatic_Shop_Management.Helpers;
 
 namespace Cosmatic_Shop_Management.Forms
 {
@@ -12,6 +13,7 @@ namespace Cosmatic_Shop_Management.Forms
     {
         private DataTable allOrders = new DataTable();
         private int selectedOrderId = -1;
+        private int myShopId = 0;
 
         public AdminOrdersForm()
         {
@@ -46,9 +48,46 @@ namespace Cosmatic_Shop_Management.Forms
 
         private void AdminOrdersForm_Load(object? sender, EventArgs e)
         {
+            myShopId = GetMyShopId();
+
+            if (myShopId <= 0)
+            {
+                MessageBox.Show("No shop found for this admin.");
+                return;
+            }
+
             SetupForm();
             LoadStatusCombo();
             LoadOrdersFromDatabase();
+        }
+
+        private int GetMyShopId()
+        {
+            try
+            {
+                string query = @"
+                    SELECT TOP 1 ShopId
+                    FROM Shops
+                    WHERE OwnerUserId = @OwnerUserId
+                    ORDER BY ShopId DESC
+                ";
+
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OwnerUserId", SessionManager.UserId)
+                };
+
+                object result = DatabaseHelper.ExecuteScalar(query, parameters);
+
+                if (result == null || result == DBNull.Value)
+                    return 0;
+
+                return Convert.ToInt32(result);
+            }
+            catch
+            {
+                return 0;
+            }
         }
 
         private void SetupForm()
@@ -100,10 +139,16 @@ namespace Cosmatic_Shop_Management.Forms
                     INNER JOIN Users U ON O.CustomerUserId = U.UserId
                     INNER JOIN OrderItems OI ON O.OrderId = OI.OrderId
                     INNER JOIN Products P ON OI.ProductId = P.ProductId
+                    WHERE OI.ShopId = @ShopId
                     ORDER BY O.OrderId DESC, OI.OrderItemId DESC
                 ";
 
-                allOrders = DatabaseHelper.GetDataTable(query);
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@ShopId", myShopId)
+                };
+
+                allOrders = DatabaseHelper.GetDataTable(query, parameters);
 
                 dgvOrders.DataSource = allOrders;
                 FormatGrid();
@@ -210,12 +255,14 @@ namespace Cosmatic_Shop_Management.Forms
                     INNER JOIN OrderItems OI ON O.OrderId = OI.OrderId
                     INNER JOIN Products P ON OI.ProductId = P.ProductId
                     WHERE O.OrderId = @OrderId
+                      AND OI.ShopId = @ShopId
                     ORDER BY OI.OrderItemId DESC
                 ";
 
                 SqlParameter[] parameters =
                 {
-                    new SqlParameter("@OrderId", selectedOrderId)
+                    new SqlParameter("@OrderId", selectedOrderId),
+                    new SqlParameter("@ShopId", myShopId)
                 };
 
                 DataTable dt = DatabaseHelper.GetDataTable(detailQuery, parameters);
@@ -228,7 +275,7 @@ namespace Cosmatic_Shop_Management.Forms
 
                 DataRow row = dt.Rows[0];
 
-                decimal subtotal = Convert.ToDecimal(row["TotalAmount"]);
+                decimal subtotal = Convert.ToDecimal(row["LineTotal"]);
                 decimal shipping = 0m;
                 decimal tax = Math.Round(subtotal * 0.08m, 2);
                 decimal totalPayable = subtotal + shipping + tax;
@@ -348,12 +395,20 @@ namespace Cosmatic_Shop_Management.Forms
                     UPDATE Orders
                     SET OrderStatus = @OrderStatus
                     WHERE OrderId = @OrderId
+                      AND EXISTS
+                      (
+                          SELECT 1
+                          FROM OrderItems
+                          WHERE OrderItems.OrderId = Orders.OrderId
+                            AND OrderItems.ShopId = @ShopId
+                      )
                 ";
 
                 SqlParameter[] parameters =
                 {
                     new SqlParameter("@OrderStatus", newStatus),
-                    new SqlParameter("@OrderId", selectedOrderId)
+                    new SqlParameter("@OrderId", selectedOrderId),
+                    new SqlParameter("@ShopId", myShopId)
                 };
 
                 DatabaseHelper.ExecuteNonQuery(updateQuery, parameters);
@@ -390,7 +445,12 @@ namespace Cosmatic_Shop_Management.Forms
         {
             pnlOrderDetails.Visible = false;
         }
+
         private void pnlTopHeader_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+        private void AdminOrdersForm_Load_1(object sender, EventArgs e)
         {
         }
     }

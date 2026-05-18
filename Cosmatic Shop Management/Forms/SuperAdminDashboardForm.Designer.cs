@@ -647,6 +647,7 @@
             ClientSize = new Size(1160, 707);
             Controls.Add(pnlMain);
             Name = "SuperAdminDashboardForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "SuperAdminDashboardForm";
             WindowState = FormWindowState.Maximized;
             Load += SuperAdminDashboardForm_Load;

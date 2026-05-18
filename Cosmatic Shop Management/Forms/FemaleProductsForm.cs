@@ -65,12 +65,12 @@ namespace Cosmatic_Shop_Management.Forms
             lblFormTitle.Text = "Women's Cosmetic Products";
 
             lblMinPrice.Text = "$0";
-            lblMaxPrice.Text = "$500+";
+            lblMaxPrice.Text = "$10000+";
 
             trkPriceRange.Minimum = 0;
-            trkPriceRange.Maximum = 500;
-            trkPriceRange.TickFrequency = 50;
-            trkPriceRange.Value = 500;
+            trkPriceRange.Maximum = 10000;
+            trkPriceRange.TickFrequency = 100;
+            trkPriceRange.Value = 10000;
 
             rdoInStock.Checked = false;
             rdoLowStock.Checked = false;

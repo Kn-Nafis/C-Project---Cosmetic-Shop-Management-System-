@@ -54,13 +54,13 @@ namespace Cosmatic_Shop_Management.Forms
                 lblBrandText.Text = "Glow & Co.";
 
             if (ControlExists("lblHeroTitle"))
-                lblHeroTitle.Text = "Luminous Bloom: New Arrivals 2024";
+                lblHeroTitle.Text = "Luminous Bloom: New Arrivals 2026";
 
             if (ControlExists("lblHighlightedProductsTitle"))
-                lblHighlightedProductsTitle.Text = "Highlighted Products";
+                lblHighlightedProductsTitle.Text = "Search Products";
 
             if (ControlExists("lblHighlightedProductsSubtitle"))
-                lblHighlightedProductsSubtitle.Text = "Our most coveted items for this month.";
+                lblHighlightedProductsSubtitle.Text = "Type in the search box to find products.";
 
             if (ControlExists("lblMaleTitle"))
                 lblMaleTitle.Text = "Male";
@@ -95,8 +95,13 @@ namespace Cosmatic_Shop_Management.Forms
             {
                 flpHighlightedProducts.Controls.Clear();
 
+                if (string.IsNullOrWhiteSpace(searchText))
+                {
+                    return;
+                }
+
                 string query = @"
-                    SELECT TOP 20
+                    SELECT TOP 50
                         P.ProductId,
                         P.ProductName,
                         P.Price,
@@ -106,21 +111,12 @@ namespace Cosmatic_Shop_Management.Forms
                     FROM Products P
                     LEFT JOIN Reviews R ON P.ProductId = R.ProductId
                     WHERE P.IsActive = 1
-                      AND P.IsHighlighted = 1
-                ";
-
-                SqlParameter[]? parameters = null;
-
-                if (!string.IsNullOrWhiteSpace(searchText))
-                {
-                    query += " AND P.ProductName LIKE @SearchText";
-                    parameters = new SqlParameter[]
-                    {
-                        new SqlParameter("@SearchText", "%" + searchText.Trim() + "%")
-                    };
-                }
-
-                query += @"
+                      AND
+                      (
+                          P.ProductName LIKE @SearchText
+                          OR P.Description LIKE @SearchText
+                          OR P.GenderSection LIKE @SearchText
+                      )
                     GROUP BY
                         P.ProductId,
                         P.ProductName,
@@ -130,7 +126,25 @@ namespace Cosmatic_Shop_Management.Forms
                     ORDER BY P.ProductId DESC
                 ";
 
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@SearchText", "%" + searchText.Trim() + "%")
+                };
+
                 DataTable dt = DatabaseHelper.GetDataTable(query, parameters);
+
+                if (dt.Rows.Count == 0)
+                {
+                    Label lblNoResults = new Label();
+                    lblNoResults.Text = "No products found.";
+                    lblNoResults.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+                    lblNoResults.ForeColor = Color.DimGray;
+                    lblNoResults.AutoSize = true;
+                    lblNoResults.Margin = new Padding(20);
+
+                    flpHighlightedProducts.Controls.Add(lblNoResults);
+                    return;
+                }
 
                 foreach (DataRow row in dt.Rows)
                 {
@@ -246,7 +260,7 @@ namespace Cosmatic_Shop_Management.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Highlighted products load error: " + ex.Message);
+                MessageBox.Show("Product search load error: " + ex.Message);
             }
         }
 
@@ -294,7 +308,8 @@ namespace Cosmatic_Shop_Management.Forms
 
         private void btnShopCollection_Click(object? sender, EventArgs e)
         {
-            LoadHighlightedProducts();
+            txtSearchProducts.Clear();
+            flpHighlightedProducts.Controls.Clear();
         }
 
         private void btnProfile_Click(object sender, EventArgs e)

@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterForm));
             pnlRegisterBox = new Panel();
+            chkRegisterAsAdmin = new CheckBox();
+            chkRegisterAsCustomer = new CheckBox();
             btnBackToLogin = new Button();
             btnRegister = new Button();
             txtEmail = new TextBox();
@@ -47,8 +49,6 @@
             blRegisterSubtitle = new Label();
             lblRegisterTitle = new Label();
             picLeftBanner = new PictureBox();
-            chkRegisterAsCustomer = new CheckBox();
-            chkRegisterAsAdmin = new CheckBox();
             pnlRegisterBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picLeftBanner).BeginInit();
             SuspendLayout();
@@ -78,6 +78,28 @@
             pnlRegisterBox.Name = "pnlRegisterBox";
             pnlRegisterBox.Size = new Size(487, 670);
             pnlRegisterBox.TabIndex = 1;
+            // 
+            // chkRegisterAsAdmin
+            // 
+            chkRegisterAsAdmin.AutoSize = true;
+            chkRegisterAsAdmin.ForeColor = Color.FromArgb(74, 20, 140);
+            chkRegisterAsAdmin.Location = new Point(269, 475);
+            chkRegisterAsAdmin.Name = "chkRegisterAsAdmin";
+            chkRegisterAsAdmin.Size = new Size(184, 29);
+            chkRegisterAsAdmin.TabIndex = 19;
+            chkRegisterAsAdmin.Text = "Register As Admin";
+            chkRegisterAsAdmin.UseVisualStyleBackColor = true;
+            // 
+            // chkRegisterAsCustomer
+            // 
+            chkRegisterAsCustomer.AutoSize = true;
+            chkRegisterAsCustomer.ForeColor = Color.FromArgb(74, 20, 140);
+            chkRegisterAsCustomer.Location = new Point(33, 475);
+            chkRegisterAsCustomer.Name = "chkRegisterAsCustomer";
+            chkRegisterAsCustomer.Size = new Size(208, 29);
+            chkRegisterAsCustomer.TabIndex = 18;
+            chkRegisterAsCustomer.Text = "Register As Customer";
+            chkRegisterAsCustomer.UseVisualStyleBackColor = true;
             // 
             // btnBackToLogin
             // 
@@ -254,28 +276,6 @@
             picLeftBanner.TabIndex = 2;
             picLeftBanner.TabStop = false;
             // 
-            // chkRegisterAsCustomer
-            // 
-            chkRegisterAsCustomer.AutoSize = true;
-            chkRegisterAsCustomer.ForeColor = Color.FromArgb(74, 20, 140);
-            chkRegisterAsCustomer.Location = new Point(33, 475);
-            chkRegisterAsCustomer.Name = "chkRegisterAsCustomer";
-            chkRegisterAsCustomer.Size = new Size(208, 29);
-            chkRegisterAsCustomer.TabIndex = 18;
-            chkRegisterAsCustomer.Text = "Register As Customer";
-            chkRegisterAsCustomer.UseVisualStyleBackColor = true;
-            // 
-            // chkRegisterAsAdmin
-            // 
-            chkRegisterAsAdmin.AutoSize = true;
-            chkRegisterAsAdmin.ForeColor = Color.FromArgb(74, 20, 140);
-            chkRegisterAsAdmin.Location = new Point(269, 475);
-            chkRegisterAsAdmin.Name = "chkRegisterAsAdmin";
-            chkRegisterAsAdmin.Size = new Size(184, 29);
-            chkRegisterAsAdmin.TabIndex = 19;
-            chkRegisterAsAdmin.Text = "Register As Admin";
-            chkRegisterAsAdmin.UseVisualStyleBackColor = true;
-            // 
             // RegisterForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -289,6 +289,7 @@
             Name = "RegisterForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "RegisterForm";
+            WindowState = FormWindowState.Maximized;
             Load += RegisterForm_Load;
             pnlRegisterBox.ResumeLayout(false);
             pnlRegisterBox.PerformLayout();
